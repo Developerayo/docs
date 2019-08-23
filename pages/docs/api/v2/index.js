@@ -314,6 +314,10 @@ class APIPage extends Component {
               border-bottom: 1px solid #eaeaea;
             }
 
+            .category-wrapper:last-child {
+              padding-bottom: 0;
+            }
+
             .category-wrapper,
             .section-wrapper,
             .entry-wrapper {
