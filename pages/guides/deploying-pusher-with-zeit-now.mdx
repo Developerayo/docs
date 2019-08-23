@@ -10,21 +10,21 @@ import { P } from '~/components/text/paragraph'
 import { Image } from '~/components/media'
 
 export const meta = {
-  title: 'Deploying Realtime Serverless Apps with Pusher and Now',
+  title: 'Deploying Realtime Serverless Apps with Pusher and ZEIT Now',
   description:
-    'How to get started building and deploying realtime serverless apps with Pusher and ZEIT Now',
+    'How to get started building and deploying realtime serverless apps with Pusher on ZEIT Now',
   published: '2019-08-20T19:22:52.039Z',
   authors: ['coetry'],
-  url: '/guides/deploying-pusher-with-now',
+  url: '/guides/deploying-pusher-with-zeit-now',
   image:
     'https://og-image.now.sh/**Realtime%20Serverless%20Apps**%20with%20Pusher.png?theme=light&md=1&fontSize=100px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fzeit-black-triangle.svg&images=https%3A%2F%2Fpusher-icon.now-examples.now.sh',
-  editUrl: 'pages/guides/deploying-pusher-with-now.mdx',
+  editUrl: 'pages/guides/deploying-pusher-with-zeit-now.mdx',
   lastEdited: '2019-08-20T19:24:08.000Z'
 }
 
-WebSockets have enabled realtime online experiences like collaborative document editing, multiplayer games, and interactive chatrooms. Solutions like [socket.io](https://socket.io) have made writing WebSocket servers a breeze, but what if our backend is a serverless lambda function with limited execution times?
+WebSockets have enabled realtime online experiences like collaborative document editing, multiplayer games, and interactive chatrooms. Solutions such as [socket.io](https://socket.io) have made writing WebSocket servers a breeze, but what if our backend is a serverless lambda function with limited execution times?
 
-By design, lambda functions have maximum execution limits and should aim to respond to the client as quick as possible. An open WebSocket connection would require processes to live until the connection is closed, which can be well over the maximum execution time. Thankfully, we have solutions like [Pusher Channels](https://pusher.com/channels) that solve complex realtime infrastructure problems so we don’t have to. All we need is a single lambda function to _publish_ or _push_ some data, and a client to _subscribe_ to channels and data events.
+By design, serverless functions have maximum execution limits and should aim to respond to the client as quick as possible. An open WebSocket connection would require processes to live until the connection is closed, which can be well over the maximum execution time. Solutions like [Pusher Channels](https://pusher.com/channels) solve complex realtime infrastructure problems so you don’t have to. All you need is a single serverless function to _publish_ or _push_ some data, and a client to _subscribe_ to channels and data events.
 
 This guide demonstrates how to get started creating and deploying real-time serverless applications with framework agnostic HTML, CSS, JavaScript, Pusher, and Now. <Note>This guide will not be a full code walkthrough, but rather an overview of the key pieces. Please refer to the full source code linked at the bottom of the guide to see how everything fits together.</Note>
 
@@ -179,11 +179,12 @@ Next, create a minimal <InlineCode>now.json</InlineCode> file with environment v
 }
 ```
 
-Now we need to add the dependencies for our lambda function. If you're in the project root, navigate to the <InlineCode>api</InlineCode> directory and add the [pusher](https://www.npmjs.com/package/pusher) npm package.
+Add the dependencies for the serverless function from inside the <InlineCode>/api</InlineCode> directory.
 
 <Snippet dark text="cd api && npm i pusher" />
+<Caption>Entering the `/api` directory and installing the `pusher` npm package</Caption>
 
-Create a new file called <InlineCode>pusher-lambda.js</InlineCode>. We grab our environmental variables from <InlineCode>process.env</InlineCode> and then initialize a new Pusher object with those values. Then we pull the data that we sent to our lambda via the [req.body](https://zeit.co/docs/v2/serverless-functions/supported-languages/#node.js-request-and-response-objects) helper method and invoke [pusher.trigger](https://github.com/pusher/pusher-http-node#publishing-events) with it in addition to the channel name and the event name. We need to send a status code and a response for the lambda or else our application would return an error, so we can just chain [req.status](https://github.com/pusher/pusher-http-node#publishing-events) and [req.end](https://github.com/pusher/pusher-http-node#publishing-events) with a simple success message
+Create a <InlineCode>pusher-lambda.js</InlineCode> inside the <InlineCode>/api</InlineCode> directory that initializes a new Pusher object with the environmental variables and receives data from the [`req.body` helper method](https://zeit.co/docs/v2/serverless-functions/supported-languages/#node.js-request-and-response-objects), before invoking [`pusher.trigger`](https://github.com/pusher/pusher-http-node#publishing-events) to register the event. Then we pull the data that we sent to our lambda via the [req.body](https://zeit.co/docs/v2/serverless-functions/supported-languages/#node.js-request-and-response-objects) helper method and invoke [pusher.trigger](https://github.com/pusher/pusher-http-node#publishing-events) with it in addition to the channel name and the event name. We need to send a status code and a response for the lambda or else our application would return an error, so we can just chain [req.status](https://github.com/pusher/pusher-http-node#publishing-events) and [req.end](https://github.com/pusher/pusher-http-node#publishing-events) with a simple success message
 
 ```js
 const Pusher = require('pusher')
@@ -209,7 +210,9 @@ module.exports = (req, res) => {
 }
 ```
 
-Once <InlineCode>pusher.trigger</InlineCode> is called, an event will be broadcasted to all subscribed clients. That's all there is to wire everything up! We've created a more complete demo with these concepts [here](https://github.com/zeit/now-examples/pull/468). Take a look, hack around, and give us your feedback. Have fun!
+<Caption>`pusher-lambda.js` file inside of `/api` directory</Caption>
+
+When <InlineCode>pusher.trigger</InlineCode> is called, an event will be broadcasted to all subscribed clients. That's all there is to wire everything up. We've created a more complete demo with these concepts [here](https://github.com/zeit/now-examples/pull/468). Take a look, hack around, and give us your feedback.
 
 export default ({ children }) => <Guide meta={meta}>{children}</Guide>
 
