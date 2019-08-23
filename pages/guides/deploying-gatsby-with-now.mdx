@@ -2,17 +2,16 @@ import Guide from '~/components/layout/guide'
 import Snippet from '~/components/snippet'
 import Caption from '~/components/text/caption'
 import { GenericLink } from '~/components/text/link'
-import Card from '~/components/card'
 
 export const meta = {
-  title: 'Create a Gatsby Website and Deploy It with Now',
+  title: 'Create a Gatsby Website and Deploy It with ZEIT Now',
   description:
-    'Learn how to create a simple Gatsby website and deploy it live with ZEIT Now',
+    'Learn how to create a simple Gatsby website and deploy it live with ZEIT Now.',
   published: '2019-01-31T12:00:00.860Z',
   authors: ['timothy'],
   url: '/guides/deploying-gatsby-with-now',
   editUrl: 'pages/guides/deploying-gatsby-with-now.mdx',
-  lastEdited: '2019-08-06T15:31:27.000Z'
+  lastEdited: '2019-08-22T09:01:17.000Z'
 }
 
 [Gatsby](https://www.gatsbyjs.org) is a popular front-end framework that helps you create static apps and websites with React.
@@ -23,19 +22,19 @@ In this guide, we will show how you can set up your Gatsby project and deploy wi
 
 If you have not already [set up a Gatsby project](https://www.gatsbyjs.org/docs/quick-start) you can do so by first installing Gatsby CLI globally from your terminal:
 
-<Snippet dark text="yarn global add gatsby-cli" />
-<Caption>Installing <GenericLink href="https://www.gatsbyjs.org/docs/gatsby-cli/">gatsby-cli</GenericLink> globally with <GenericLink href="https://yarnpkg.com">Yarn</GenericLink>.</Caption>
+<Snippet dark text="npm i -g gatsby-cli" />
+<Caption>Installing <GenericLink href="https://www.gatsbyjs.org/docs/gatsby-cli/">gatsby-cli</GenericLink> globally with <GenericLink href="https://www.npmjs.com/">npm</GenericLink>.</Caption>
 
 Then you can run the following command to create a Gatsby project locally:
 
 <Snippet dark text="gatsby new my-gatsby-project" />
 <Caption>Creating a Gatsby project with the Gatsby CLI.</Caption>
 
-Next, move into the directory from your terminal with `cd my-gatsby-project`. You can see your new project in a local development environment by using the `yarn develop` command, set in the `package.json` by Gatsby CLI.
+Next, move into the directory from your terminal with `cd my-gatsby-project`. You can see your new project in a local development environment by using the `npm develop` command, set in the `package.json` by Gatsby CLI.
 
 ## Step 2: Deploying Your Gatsby Website
 
-With a Gatsby application set up, it is ready to deploy live with [Now](/docs/v2).
+With a Gatsby app set up, it is ready to deploy live with [Now](/docs/v2).
 
 If you have not yet installed Now, you can do so by [installing Now CLI](/download).
 
@@ -46,31 +45,6 @@ Now allows you to [deploy your project](/docs/v2/deployments/basics) from the te
 <Caption>Deploying you Gatsby website with Now CLI.</Caption>
 
 If you want to deploy your Gatsby project when you push to a Git repository, you can use either [Now for GitHub](/docs/v2/integrations/now-for-github/) or [Now for GitLab](/docs/v2/integrations/now-for-gitlab/) to have your project automatically deployed on every push, and aliased on push to master.
-
-## Resources
-
-For more information on working with Gatsby, please refer to [their documentation](https://www.gatsbyjs.org/docs/).
-
-To configure Now further, please see these additional topics and guides:
-
-<Card title="Deploying Basics" href="/docs/v2/deployments/basics">
-  Deploy any of your applications with ZEIT Now.
-</Card>
-
-<Card
-  title="Aliasing"
-  href="/docs/v2/custom-domains#deploying-with-your-domain"
->
-  Learn more about aliasing to your deployments.
-</Card>
-
-<Card title="www. Redirect" href="/guides/redirect-from-www">
-  Create a redirect from the www. subdomain to your naked domain.
-</Card>
-
-<Card title="More Guides" href="/guides">
-  See more guides that help you move forward with your projects and deployments.
-</Card>
 
 export default ({ children }) => <Guide meta={meta}>{children}</Guide>
 

@@ -2,16 +2,15 @@ import Guide from '~/components/layout/guide'
 import Snippet from '~/components/snippet'
 import { InlineCode } from '~/components/text/code'
 import Caption from '~/components/text/caption'
-import Card from '~/components/card'
 
 export const meta = {
   title: 'How to Update Now CLI',
-  description: 'A guide to updating Now CLI using a package manager.',
+  description: 'Learn how to update Now CLI using a package manager.',
   published: '2019-03-20T03:00:00.860Z',
   authors: ['msweeneydev', 'timothy'],
   url: '/guides/updating-now-cli',
   editUrl: 'pages/guides/updating-now-cli.mdx',
-  lastEdited: '2019-08-07T16:21:53.000Z'
+  lastEdited: '2019-08-22T08:51:22.000Z'
 }
 
 When there is a new release of the [Now CLI](https://zeit.co/download#now-cli) available, you will see a message appear in your terminal output when running Now, letting you know that there is a newer version.
@@ -35,25 +34,6 @@ If you have installed our command-line interface via [Yarn](https://yarnpkg.com)
 <Caption>Updating Now CLI using the <InlineCode>yarn</InlineCode> command.</Caption>
 
 In the case that permission errors are preventing you from installing, please read npm's [official guide](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally) about this problem (Yarn depends on the same configuration).
-
-## Read Next
-
-With a fully up-to-date Now CLI, read the following resources for how you can deploy your applications and control them, all from the terminal.
-
-<Card title="Deploying Basics" href="/docs/v2/deployments/basics">
-  Deploy any of your applications with ZEIT Now.
-</Card>
-
-<Card
-  title="Aliasing"
-  href="/docs/v2/custom-domains#deploying-with-your-domain"
->
-  Learn more about aliasing to your deployments.
-</Card>
-
-<Card title="Guides" href="/guides">
-  See guides that help you build your first projects and deployments.
-</Card>
 
 export default ({ children }) => <Guide meta={meta}>{children}</Guide>
 

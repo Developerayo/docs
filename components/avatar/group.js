@@ -52,7 +52,8 @@ const AvatarGroup = ({ members, limit = 3, size = 22 }) => {
           margin-left: -10px;
         }
         .note {
-          font-size: 14px;
+          font-size: var(--font-size-primary);
+          line-height: var(--line-height-primary);
           display: inline-flex;
           padding-left: 5px;
           justify-content: flex-end;

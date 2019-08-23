@@ -1,11 +1,12 @@
 import Example from '~/components/example'
 import { Code, RequestHeader } from '~/components/text/code'
 import Caption from '~/components/text/caption'
-import { P } from '~/components/text/paragraph'
+import Note from '~/components/text/note'
+import { GenericLink } from '~/components/text/link'
 
 export const meta = {
   editUrl: 'pages/docs/api/v2/api-docs-mdx/api-basics/rate-limits.mdx',
-  lastEdited: '2019-03-22T02:48:37.000Z'
+  lastEdited: '2019-08-15T22:07:24.000Z'
 }
 
 ## Rate Limits
@@ -19,10 +20,8 @@ Rate limits vary and are specified by the following header in all responses:
 | **<RequestHeader>X-RateLimit-Remaining</RequestHeader>** | The number of requests remaining in the current rate limit window.           |
 | **<RequestHeader>X-RateLimit-Reset</RequestHeader>**     | The time at which the current rate limit window resets in UTC epoch seconds. |
 
-<P>
-  When the rate limit is <P.B>exceeded</P.B>, an error is returned with the
-  status "<P.B>429 Too Many Requests</P.B>":
-</P>
+When the rate limit is **exceeded**, an error is returned with the
+status "**429 Too Many Requests**":
 
 <Example>
 
@@ -34,3 +33,11 @@ Rate limits vary and are specified by the following header in all responses:
 }`}</Code>
 <Caption>An example of a rate limit exceeded error.</Caption>
 </Example>
+
+<Note>
+  You can find the complete list of rate limits in the{' '}
+  <GenericLink href="/docs/v2/advanced/platform/limits/">
+    limits documentation
+  </GenericLink>
+  .
+</Note>

@@ -9,10 +9,11 @@ const getContent = (zenModeActive, children) => {
         div {
           display: flex;
           flex-direction: column;
-          flex: 1;
-          max-width: 100%;
-          padding-left: calc(280px + 40px);
+          flex: 0 0 100%;
+          max-width: calc(100% - 280px);
           padding-bottom: 128px;
+          padding-left: 24px;
+          margin-left: auto;
         }
 
         .content-zen-mode {
@@ -22,6 +23,7 @@ const getContent = (zenModeActive, children) => {
         @media screen and (max-width: 950px) {
           div {
             padding-left: 0;
+            max-width: 100%;
           }
         }
       `}</style>

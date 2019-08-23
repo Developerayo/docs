@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import Copy from '~/components/icons/copy'
 
-import { withToasts, useToasts } from '~/components/toasts'
+import { useToasts } from '~/components/toasts'
 
 const Snippet = memo(
   ({ text, onCopy, width = '100%', prompt = true, dark }) => {
@@ -108,4 +108,4 @@ Snippet.propTypes = {
   dark: PropTypes.bool
 }
 
-export default withToasts(Snippet)
+export default Snippet

@@ -2,70 +2,53 @@ import React from 'react'
 import cn from 'classnames'
 import PropTypes from 'prop-types'
 
-const Note = ({
-  children,
-  className,
-  hideLabel,
-  warning,
-  hint,
-  alert,
-  label,
-  ...props
-}) => {
+import Text from '~/components/text'
+import getColor from '~/lib/utils/get-color'
+
+const Note = ({ children, className, type, fill, label, small, ...props }) => {
+  // The default filled variant should be inverted colors
+  if (fill && !type) {
+    type = 'default'
+  }
+
   return (
-    <div
-      className={`note ${cn({ warning, hint, alert }, className)}`}
-      {...props}
-    >
-      {!hideLabel && (
-        <b className="note__type">
+    <div className={cn('note', className, { small })} {...props}>
+      {label !== false && (
+        <Text bold span uppercase>
           {(label && `${label}: `) ||
-            (warning && `Warning: `) ||
-            (hint && `Hint: `) ||
-            (alert && `Alert: `) ||
+            (type === 'success' && `Success: `) ||
+            (type === 'error' && `Error: `) ||
+            (type === 'warning' && `Warning: `) ||
             `Note: `}
-        </b>
+        </Text>
       )}
 
       {children}
 
       <style jsx>{`
         .note {
-          padding: 16px 24px;
-          border-radius: 4px;
-          border: 1px solid #dddddd;
-          font-size: 14px;
-          line-height: 1.8;
-          margin: 24px 0;
-        }
-
-        .note.warning {
-          border-color: #ff001f;
-        }
-
-        .note.hint {
-          border-color: #0076ff;
-        }
-
-        .note.alert {
-          border-color: #f48121;
+          padding: ${small
+            ? 'var(--geist-gap-quarter) var(--geist-gap-half)'
+            : 'var(--geist-gap-half) var(--geist-gap)'};
+          border-radius: var(--geist-radius);
+          background: ${fill ? getColor(type) : 'var(--geist-background)'};
+          border: 1px solid ${getColor(type) || 'var(--accents-2)'};
+          font-size: var(--font-size-primary);
+          line-height: var(--line-height-primary);
+          color: ${fill
+            ? type === 'default'
+              ? 'var(--geist-background)'
+              : '#FFF'
+            : getColor(type) || 'var(--geist-foreground)'};
+          margin-bottom: 24px;
         }
 
         .note__type {
           text-transform: uppercase;
           font-weight: 500;
         }
-
-        .note.warning .note__type {
-          color: #ff001f;
-        }
-
-        .note.hint .note__type {
-          color: #0076ff;
-        }
-
-        .note.alert .note__type {
-          color: #f48121;
+        .note.small {
+          padding: 5px var(--geist-gap-half);
         }
       `}</style>
     </div>
@@ -76,10 +59,14 @@ Note.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   hideLabel: PropTypes.bool,
-  warning: PropTypes.bool,
-  hint: PropTypes.bool,
-  alert: PropTypes.bool,
-  label: PropTypes.string
+  type: PropTypes.oneOf([
+    'secondary',
+    'success',
+    'error',
+    'warning',
+    'default'
+  ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 }
 
 export default Note

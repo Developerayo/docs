@@ -1,13 +1,22 @@
 # Learn how to add code owners here:
 # https://help.github.com/en/articles/about-code-owners
 
-*                                         @timothyis @msweeneydev @skllcrn
-pages/docs/integrations/                       @arunoda
-pages/docs/v2/development/                @leo @AndyBitz @TooTallNate
-pages/docs/v2/network/                    @juancampa @hharnisc @dav-is
-pages/docs/v2/domains-and-aliases/        @anatrajkovska @javivelasco @mglagola
-pages/docs/v2/getting-started/            @joecohens @paulogdm @msweeneydev @timothyis @skllcrn @coetry
-pages/docs/v2/integrations/               @arunoda
-pages/docs/v2/platform/                   @leo @styfle
-pages/docs/v2/deployments/                @leo @AndyBitz @TooTallNate @styfle @sophearak
-pages/docs/api/                           @anatrajkovska @arunoda @javivelasco @mglagola
+*                                           @timothyis @msweeneydev @skllcrn
+pages/docs/v2/introduction.mdx              @joecohens @paulogdm @msweeneydev @timothyis @skllcrn @coetry
+pages/docs/v2/git-integration.mdx           @arunoda @timothyis @msweeneydev @skllcrn
+pages/docs/v2/build-step.mdx                @leo @AndyBitz @TooTallNate @timothyis @msweeneydev @skllcrn
+pages/docs/v2/custom-domains.mdx            @anatrajkovska @javivelasco @mglagola @joecohens
+pages/docs/v2/serverless-functions/         @leo @AndyBitz @TooTallNate @timothyis @msweeneydev @skllcrn
+pages/docs/v2/network/                      @juancampa @hharnisc @dav-is @timothyis @msweeneydev @skllcrn @joecohens
+pages/docs/v2/advanced/now-for-github.mdx   @arunoda @timothyis @msweeneydev @skllcrn
+pages/docs/v2/advanced/now-for-gitlab.mdx   @arunoda @timothyis @msweeneydev @skllcrn
+pages/docs/v2/advanced/configuration.mdx    @leo @styfle @AndyBitz @timothyis @msweeneydev @skllcrn @joecohens
+pages/docs/v2/advanced/global-configuration.mdx    @leo @timothyis @msweeneydev @skllcrn @joecohens
+pages/docs/v2/advanced/routes.mdx           @leo @AndyBitz @timothyis @msweeneydev @skllcrn @joecohens
+pages/docs/v2/advanced/deploy-hooks.mdx     @anatrajkovska @javivelasco @mglagola @timothyis @msweeneydev @skllcrn @joecohens
+pages/docs/v2/advanced/builders.mdx         @leo @AndyBitz @styfle @timothyis @msweeneydev @skllcrn @joecohens
+pages/docs/v2/advanced/concepts/            @leo @timothyis @msweeneydev @skllcrn @joecohens
+pages/docs/v2/advanced/domains/             @anatrajkovska @javivelasco @mglagola @timothyis @msweeneydev @skllcrn @joecohens
+pages/docs/v2/advanced/platform/            @leo @styfle @timothyis @msweeneydev @skllcrn @joecohens
+pages/docs/api/                             @anatrajkovska @arunoda @javivelasco @mglagola @timothyis @msweeneydev @skllcrn
+pages/docs/integrations/                    @arunoda @timothyis @msweeneydev @skllcrn

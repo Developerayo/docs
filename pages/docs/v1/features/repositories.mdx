@@ -1,17 +1,15 @@
 import Doc from '~/components/layout/docs'
-
 import Now from '~/components/text/now'
 import { InternalLink } from '~/components/text/link'
 import { TerminalInput } from '~/components/text/terminal'
 import { Image } from '~/components/media'
-import { P } from '~/components/text/paragraph'
 
 export const meta = {
   title: 'Deploying Git Repositories',
   description: 'Targeting and deploying a Git repository with Now',
   date: '12 Mar 2017',
   editUrl: 'pages/docs/v1/features/repositories.mdx',
-  lastEdited: '2019-03-05T01:21:32.000Z'
+  lastEdited: '2019-08-16T15:05:32.000Z'
 }
 
 If you're developing a project that requires local changes before it can be deployed (like a regular application), running just now is the right way to move your code into the cloud.
@@ -59,13 +57,13 @@ Since there might be cases in which you'd like to choose a certain branch or com
 Simply append a `#` followed by the name of the branch or the commit. Assuming that you'd like to deploy the branch "v2", this is how the command will look like:
 
 <TerminalInput>
-  now rauchg/slackin<P.B>#v2</P.B>
+  now rauchg/slackin<b>#v2</b>
 </TerminalInput>
 
 And it works just as easy for commits. Just append the SHA:
 
 <TerminalInput>
-  now rauchg/slackin<P.B>#e0f09a5</P.B>
+  now rauchg/slackin<b>#e0f09a5</b>
 </TerminalInput>
 
 By default, <Now color="#000" /> will select the master branch. However, as you can see, it only requires a single statement to change this!
@@ -75,19 +73,19 @@ By default, <Now color="#000" /> will select the master branch. However, as you 
 All of the things mentioned above can also be achieved by simply telling <Now color="#000" /> the URL of the repository which you'd like to deploy (also supports GitLab and BitBucket):
 
 <TerminalInput>
-  now <P.B>https://github.com/rauchg/slackin</P.B>
+  now <b>https://github.com/rauchg/slackin</b>
 </TerminalInput>
 
 This also means that you can easily point to commits:
 
 <TerminalInput>
-  now <P.B>https://github.com/rauchg/slackin/commit/20ae6d3</P.B>
+  now <b>https://github.com/rauchg/slackin/commit/20ae6d3</b>
 </TerminalInput>
 
 ...or even branches:
 
 <TerminalInput>
-  now <P.B>https://github.com/rauchg/slackin/tree/master</P.B>
+  now <b>https://github.com/rauchg/slackin/tree/master</b>
 </TerminalInput>
 
 ## How It Works

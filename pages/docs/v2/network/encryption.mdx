@@ -1,18 +1,20 @@
 import Doc from '~/components/layout/docs'
 import Note from '~/components/text/note'
 import { GenericLink } from '~/components/text/link'
-import { P } from '~/components/text/paragraph'
+import { P } from '~/components/text'
+import Caption from '~/components/text/caption'
+import { InlineCode } from '~/components/text/code'
 
 export const meta = {
   title: 'Encryption',
   description: 'Every ZEIT Now deployment is served of a HTTPS Connection.',
   editUrl: 'pages/docs/v2/network/encryption.mdx',
-  lastEdited: '2019-08-06T15:31:27.000Z'
+  lastEdited: '2019-08-21T15:24:05.000Z'
 }
 
-Out of the box, every **Deployment** you create using Now is served over a HTTPS connection. The SSL certificates for these unique URLs are automatically generated and free of charge.
+Out of the box, every **Deployment** on ZEIT Now is served over an HTTPS connection. The [SSL](https://en.wikipedia.org/wiki/Transport_Layer_Security) certificates for these unique URLs are automatically generated free of charge.
 
-Furthermore, any HTTP requests to your **Deployments** are automatically forwarded to HTTPS using the `301` status code:
+Furthermore, any HTTP requests to your **Deployments** are automatically forwarded to HTTPS using the `301` status code:
 
 ```
 HTTP/1.1 301 Moved Permanently
@@ -20,60 +22,77 @@ Content-Type: text/plain
 Location: https://<your-deployment-host>
 ```
 
-It is not possible to disable this redirection or prevent the **Deployment** from being served over HTTPS as it is considered an industry standard to serve web contents over a secure connection.
+<Caption>
+  An example showing how all <InlineCode>HTTP</InlineCode> requests are
+  forwarded to <InlineCode>HTTPS</InlineCode>.
+</Caption>
+
+It is not possible to disable this redirection or prevent the **Deployment** from being served over HTTPS as it is considered an industry standard to serve web content over a secure connection.
 
 <Note>
-  if the client that as issuing requests to your <P.B>Deployment</P.B> wants to
-  establish a WebSocket connection, please ensure it is connecting using HTTPS
-  directly, as the WSS protocol does not support redirections.
+  {' '}
+  If the client that is issuing requests to your <b>Deployment</b> wants to establish
+  a WebSocket connection, please ensure it is connecting using HTTPS directly, as
+  the WSS protocol does not support redirections.
 </Note>
 
 ## Supported TLS Versions
 
-Now supports TLS version [1.2](https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_1.2).
+ZEIT Now supports TLS version [1.2](https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_1.2).
 
 ## Supported Ciphers
 
-In order to ensure the integrity of the data received and sent by any **Deployment** running on the **Now** platform, we only support ciphers with [forward secrecy](https://en.wikipedia.org/wiki/Forward_secrecy).
+In order to ensure the integrity of the data received and sent by any **Deployment** running on the **ZEIT Now** platform, we only support ciphers with [forward secrecy](https://en.wikipedia.org/wiki/Forward_secrecy).
 
-The following cipher algorithms are supported at the moment:
+The following cipher algorithms are supported:
 
-```
-ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DH+3DES:!ADH:!AECDH:!MD5:!EDH-RSA-DES-CBC3-SHA
-```
+- ECDH+AESGCM
+- ECDH+AES256
+- ECDH+AES128
+- DH+3DES
+- !ADH
+- !AECDH
+- !MD5
+- !EDH-RSA-DES-CBC3-SHA
 
 ## Support for HSTS
 
-Only the `.now.sh` domain (and therefore all of its sub domains, which are the unique URLs you receive when creating a deployment) supports HSTS.
+Only the `.now.sh` domain (and therefore all of its sub domains, which are the unique URLs set when creating a deployment) support HSTS.
 
-You can enable by setting the `Strict-Transport-Security` ([more details](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)) header to the following value in your **Deployment**:
+You can enable this by setting the `Strict-Transport-Security` ([more details](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)) header to the following value in your **Deployment**:
 
 ```
-max-age=31536000; includeSubDomains;
+Strict-Transport-Security: max-age=31536000; includeSubDomains;
 ```
 
-Theoretically, you could set the `max-age` parameter to a different value (it indicates how long the client should remember that your site is only accessible over HTTPS), but since we do not allow connections made over HTTP, there is no point in setting it to a shorter value, as the client can just remember it forever.
+<Caption>
+  An example <InlineCode>Strict-Transport-Security</InlineCode> header enabling
+  HSTS.
+</Caption>
 
-<Note>
-  you can try whether your site qualifies for HSTS Preloading{' '}
-  <GenericLink href="https://hstspreload.org/">here</GenericLink>. It also
-  allows submitting the domain to Google Chrome's hardcoded HSTS list. Making it
-  onto that list means your site will become even faster, as it is always
-  accessed over HTTPS right away (instead of the browser following the
-  redirection issued by our <P.B>Network</P.B> layer).
+Theoretically, you could set the `max-age` parameter to a different value (it indicates how long the client should remember that your site is only accessible over HTTPS), but since we do not allow connections made over HTTP, there is no point in setting it to a shorter value, as the client can just remember it forever.
+
+<Note hint>
+  {' '}
+  You can test whether your site qualifies for HSTS Preloading <GenericLink href="https://hstspreload.org/">
+    here
+  </GenericLink>. It also allows submitting the domain to Google Chrome's hardcoded
+  HSTS list. Making it onto that list means your site will become even faster, as
+  it is always accessed over HTTPS right away, instead of the browser following the
+  redirection issued by our <b>Network</b> layer.
 </Note>
 
 ## How Certificates Are Handled
 
-The unique URLs generated when creating a deployment are handled using a wildcard certificate issued for the `.now.sh` domain.
+The unique URLs generated when creating a deployment are handled using a wildcard certificate issued for the `.now.sh` domain. The **ZEIT Now** platform generates wildcard certificates using [LetsEncrypt](https://letsencrypt.org/) and keeps them updated automatically.
 
-When custom certificates are generated using `now certs issue`, however, their keys are placed in our database and [encrypted at rest](https://en.wikipedia.org/wiki/Data_at_rest#Encryption) within the Network layer.
+When custom certificates are generated using `now certs issue`, however, their keys are placed in our database and [encrypted at rest](https://en.wikipedia.org/wiki/Data_at_rest#Encryption) within the Network layer.
 
 Then, once a hostname is requested, the certificate and key are read from the database and used for establishing the secure connection. In addition, both are cached in memory for optimal SSL termination performance.
 
 ## Full Specification
 
-Any features of the encryption mechanism that were left uncovered are documented [here](https://www.ssllabs.com/ssltest/analyze.html?d=zeit.co). You only need to make sure to select any IP address of your choice (it does not matter which one you pick, the results are the same for all).
+Any features of the encryption mechanism that were left uncovered are documented [here](https://www.ssllabs.com/ssltest/analyze.html?d=zeit.co). You only need to make sure to select any IP address of your choice (it does not matter which one you pick – the results are the same for all).
 
 export default ({ children }) => <Doc meta={meta}>{children}</Doc>
 

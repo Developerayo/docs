@@ -1,8 +1,7 @@
 import cn from 'classnames'
 import { Component } from 'react'
 import { GenericLink } from '~/components/text/link'
-import H4 from '~/components/text/h4'
-import { P } from '~/components/text/paragraph'
+import { H4 } from '~/components/text'
 
 export default class Card extends Component {
   render() {
@@ -11,12 +10,8 @@ export default class Card extends Component {
     return (
       <div className={cn('card', className)} {...props}>
         <GenericLink href={href} as={as}>
-          {title && (
-            <H4>
-              {title} <span className="arrow">→</span>
-            </H4>
-          )}
-          <P>{children}</P>
+          {title && <H4>{title}</H4>}
+          <p>{children}</p>
         </GenericLink>
 
         <style jsx>{`
@@ -40,35 +35,31 @@ export default class Card extends Component {
             width: 100%;
             height: 100%;
             flex-direction: column;
-            font-size: 14px;
-            color: black;
+            font-size: var(--font-size-small);
+            line-height: var(--line-height-small);
+            color: var(--accents-5);
             text-decoration: none;
+            transition: color 0.12s ease;
           }
 
           .card :global(h4) {
             margin-top: 0;
-            margin-bottom: 8px;
-            color: #0076ff;
-            font-weight: 700;
-            font-size: 14px;
+            margin-bottom: 4px;
+            color: var(--geist-foreground);
+            font-weight: 500;
+            font-size: var(--font-size-primary);
+            line-height: var(--line-height-primary);
           }
 
           .card:hover :global(a) {
             text-decoration: none;
+            color: var(--geist-foreground);
           }
 
           .card:hover {
             text-decoration: none;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            border-color: #dddddd;
-          }
-
-          .card .arrow {
-            transition: margin-left 0.2s ease;
-          }
-
-          .card:hover .arrow {
-            margin-left: 4px;
+            border-color: var(--accents-2);
           }
         `}</style>
       </div>

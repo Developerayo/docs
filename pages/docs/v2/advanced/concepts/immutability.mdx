@@ -3,16 +3,16 @@ import Doc from '~/components/layout/docs'
 export const meta = {
   title: 'Deployment Immutability',
   description:
-    'A look at the concept of immutable deployments, the reasoning behind the behaviour, and the technical aspects of the implementation.',
+    'A look at the concept of immutable deployments, the reasoning behind the behavior, and the technical aspects of the implementation.',
   editUrl: 'pages/docs/v2/advanced/concepts/immutability.mdx',
-  lastEdited: '2019-08-06T15:31:27.000Z'
+  lastEdited: '2019-08-22T10:47:21.000Z'
 }
 
-For a Now deployment to be created, our API requires the client to include a description of the project directory structure and content, expressed as a series of [checksums](https://en.wikipedia.org/wiki/Checksum).
+For a ZEIT Now deployment to be created, our API requires the client to include a description of the project directory structure and content, expressed as a series of [checksums](https://en.wikipedia.org/wiki/Checksum).
 
 If our system finds a sourcefile checksum to be missing in our database, it will request the client to upload it and retry.
 
-Next, our system decides if a **new** deployment is necessary, based on the project config and sources. If they match an existing deployment, we return its [Deployment URL](/docs/v2/deployments/concepts/urls).
+Next, our system decides if a **new** deployment is necessary, based on the project config and sources. If they match an existing deployment, we return its [Deployment URL](/docs/v2/advanced/concepts/urls).
 
 It is worth pointing out that there is no notion of **editing or modifying an existing deployment**. When you make a source or config change, a new deployment is always created.
 
@@ -22,13 +22,13 @@ Immutability enables many important properties for scalable deployments and larg
 
 #### Historical overview and rollbacks
 
-When you run `now ls`, visit the Deployments List on our web UI, or browse through pull request or pushes made via our [GitHub integration](/docs/v2/integrations/now-for-github), all the deployments will continue to work concurrently.
+When you run `now ls`, visit the Deployments List on our web UI, or browse through pull request or pushes made via our [GitHub integration](/docs/v2/advanced/now-for-github), all the deployments will continue to work concurrently.
 
 This allows you to examine the evolution of a project over time. In addition, if a bug is detected, you can instantly roll back by changing the [alias](/docs/v2/custom-domains#deploying-with-your-domain) of your production domain.
 
 #### Instant Git Reverts
 
-With Now + Github, if a PR is merged that yields an undesirable outcome, it should be quickly reverted. Similarly, one can revert a commit in any branch of a vanilla `git` repository.
+With ZEIT Now + Github, if a PR is merged that yields an undesirable outcome, it should be quickly reverted. Similarly, one can revert a commit in any branch of a vanilla `git` repository.
 
 Due to the [Now deduplication algorithm](#deduplication-algorithm), if a deployment existed in the past that matches the new source code state.
 
@@ -40,7 +40,7 @@ There is no situation where the changes pushed or deployed by a certain individu
 
 #### Deduplication Algorithm
 
-The [URL structure](/docs/v2/deployments/concepts/urls) of each deployment contains in the **subdomain**, the name of the application and a random UID.
+The [URL structure](/docs/v2/advanced/concepts/urls) of each deployment contains in the **subdomain**, the name of the application and a random UID.
 
 We decide to generate a new UID (and therefore a new deployment), by combining the following information into an internal digest that we look up in our database:
 
@@ -50,7 +50,7 @@ We decide to generate a new UID (and therefore a new deployment), by combining t
 
 We ensure the digest is computed [deterministically](https://en.wikipedia.org/wiki/Deterministic_algorithm) by sorting and ordering all the inputs involved in the algorithm.
 
-Our lookup excludes deployments that are in an `ERROR` [state](/docs/v2/deployments/concepts/lifecycle). If a previous deployment matches the digest but failed to build correctly.
+Our lookup excludes deployments that are in an `ERROR` [state](/docs/v2/advanced/concepts/lifecycle). If a previous deployment matches the digest but failed to build correctly.
 
 #### Skipping deduplication
 
@@ -58,7 +58,7 @@ There are two ways to force a **new** deployment to be created when our system w
 
 - **Make any change** to any of the parameters considered by the algorithm above. For example, even changing one character in a comment of a source file yields a new deployment.
 - **Force a new deployment** by instructing your client to do so.
-  - For [Now CLI](/docs/v2/getting-started/installation#now-cli) you can run `now --force`
+  - For [Now CLI](/download) you can run `now --force`
   - If using our API, include the [`forceNew` query parameter](/docs/api/v2#endpoints/deployments/create-a-new-deployment)
 
 export default ({ children }) => <Doc meta={meta}>{children}</Doc>

@@ -1,7 +1,6 @@
 import Guide from '~/components/layout/guide'
 import { Image } from '~/components/media'
 import Caption from '~/components/text/caption'
-import Card from '~/components/card'
 import Note from '~/components/text/note'
 import { GenericLink } from '~/components/text/link'
 
@@ -13,7 +12,7 @@ export const meta = {
   authors: ['arunoda', 'timothy'],
   url: '/guides/getting-started-with-now-for-gitlab',
   editUrl: 'pages/guides/getting-started-with-now-for-gitlab.mdx',
-  lastEdited: '2019-08-06T15:31:27.000Z'
+  lastEdited: '2019-08-12T14:08:03.000Z'
 }
 
 The [Now for GitLab integration](/docs/v2/integrations/now-for-gitlab) provides you with automatic deployments for each push to a project, automatic aliases for pushes to the default branch, and instant rollbacks for reverts.
@@ -155,51 +154,11 @@ When you push this change to the default branch, this and all subsequent commits
 />
 <Caption style={{marginTop: '-40px'}}>A staging alias created from a merge request.</Caption>
 
-It is also possible to use your own domains or an alias using a Custom Deployment Suffix. For that, see the following documentation:
-
-<Card title="Adding a Domain" href="/docs/v2/custom-domains">
-  Learn how to add a domain for your deployments.
-</Card>
-
-<Card
-  title="Custom Deployment Suffix"
-  href="/docs/v2/platform/add-ons/#custom-deployment-suffix"
->
-  Use our add-on to put your brand on every deployment and any alias.
-</Card>
-
 ## In Conclusion
 
 Through this guide, you should now have a bulletproof deployment pipeline for all of your GitLab projects, using [Now for GitLab](/docs/v2/integrations/now-for-gitlab).
 
 With every push, an automatic deployment. With every merge request, a unique staging alias. And with every update to the default branch, your changes are aliased to production.
-
-## More Resources
-
-For more information on working with [Now for GitLab](/gitlab), please refer to [the Now for GitLab documentation](/docs/v2/integrations/now-for-gitlab).
-
-To configure Now further, please see these additional topics and guides:
-
-<Card title="Deploying Basics" href="/docs/v2/deployments/basics">
-  Deploy any of your applications with ZEIT Now.
-</Card>
-
-<Card
-  title="Aliasing"
-  href="/docs/v2/custom-domains#deploying-with-your-domain"
->
-  Learn more about aliasing to your deployments.
-</Card>
-
-<Card title="Routes" href="/docs/v2/deployments/routes">
-  Learn more about how Now uses routes to define the behavior of how a request
-  is handled on the routing side.
-</Card>
-
-<Card title="More Guides" href="/guides">
-  See more guides that help you move forward with your projects and automatic
-  deployments from Now for GitLab.
-</Card>
 
 export default ({ children }) => <Guide meta={meta}>{children}</Guide>
 

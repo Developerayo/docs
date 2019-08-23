@@ -2,22 +2,23 @@ import Doc from '~/components/layout/docs'
 import { Image } from '~/components/media'
 import Caption from '~/components/text/caption'
 import Note from '~/components/text/note'
+import { InlineCode } from '~/components/text/code'
 
 export const meta = {
   title: 'Lambdas',
   description:
     'Serverless functions that are invoked upon request and serve a dynamic response, easily deployed with ZEIT Now.',
   editUrl: 'pages/docs/v2/advanced/concepts/lambdas.mdx',
-  lastEdited: '2019-08-06T15:31:27.000Z'
+  lastEdited: '2019-08-22T10:47:21.000Z'
 }
 
-When you make a deployment, by running `now` with our [CLI](/docs/v2/getting-started/installation#now-cli), making an [API](/api) call or with our [GitHub integration](/docs/v2/integrations/now-for-github), we synchronize the source code and optionally build them to your specification.
+When you make a deployment, by running `now` with our [CLI](/download), making an [API](/api) call or with either our [GitHub](/docs/v2/integrations/now-for-github) or [GitLab](/docs/v2/integrations/now-for-gitlab) integrations, we synchronize the source code and optionally build them to your specification.
 
-The outputs of this build process can be static files or **serverless Lambdas**. Static files will be served directly from our [edge caches](/docs/v2/advanced/domains/cdn), while Lambdas contain **code** that gets executed dynamically and on-demand.
+The outputs of this build process can be static files or **serverless Lambdas**. Static files will be served directly from our [edge caches](/docs/v2/advanced/concepts/cdn-and-global-distribution), while Lambdas contain **code** that gets executed dynamically and on-demand.
 
 Lambdas allow your code to be executed on-demand and scale automatically. They minimize cost in terms of infrastructure spend and engineering time, due to largely removing operational overhead and reducing the surface of error.
 
-Now automatically provisions Lambdas with the underlying [cloud infrastructure provider](/docs/v2/platform/regions-and-providers) for dynamic code execution (such as deployments that expose APIs), to run static site generators, or to compile code in the cloud.
+ZEIT Now automatically provisions Lambdas with the underlying [cloud infrastructure provider](/docs/v2/advanced/platform/regions-and-providers) for dynamic code execution (such as deployments that expose APIs), to run static site generators, or to compile code in the cloud.
 
 ## Example
 
@@ -28,9 +29,9 @@ If you have these files in your deployment's directory:
 - `pages/index.js`
 - `api/date.js`
 
-With `pages/index.js` being a [Next.js](nextjs.org) page without any need for server-side rendering, it will be statically exported automatically.
+With `pages/index.js` being a [Next.js](https://nextjs.org) page without any need for server-side rendering, it will be statically exported automatically.
 
-In this case, we will want our Next.js page and `static/logo.svg` to be served statically from our [CDN](/docs/v2/advanced/domains/cdn).
+In this case, we will want our Next.js page and `static/logo.svg` to be served statically from our [CDN](/docs/v2/advanced/concepts/cdn-and-global-distribution).
 
 <Note>
   If a Next.js page includes server-side code, it will be built as Lambdas
@@ -43,15 +44,19 @@ The API file needs only to export a **function**:
 
 ```js
 module.exports = (req, res) => {
-  res.end('Welcome to my API')
+  res.send(new Date())
 }
 ```
 
+<Caption>
+  An example <InlineCode>/api/date.js</InlineCode> serverless function.
+</Caption>
+
 When you deploy an application using a similar structure, with static files and dynamic functions, the **build processes happens in parallel** and all yield independent outputs which the deployment then serves.
 
-Within a [Directory Listing](/docs/v2/network/directory-listing/) or [source view](/docs/v2/deployments/concepts/special-paths/#source-view), built Lambdas (represented by the icon **λ**) show up as "files" alongside static ones.
+Within a [Directory Listing](/docs/v2/network/directory-listing/) or [source view](/docs/v2/advanced/concepts/special-paths/#source-view), built Lambdas (represented by the icon **λ**) show up as "files" alongside static ones.
 
-When a request is received by a Lambda, the code package, deployed to the [specified regions](/docs/v2/platform/regions-and-providers), is executed and its response returned.
+When a request is received by a Lambda, the code package, deployed to the [specified regions](/docs/v2/advanced/platform/regions-and-providers), is executed and its response returned.
 
 It is helpful to think of the generated Lambdas as "lightweight binaries" that get executed (or typically called "**invoked**") on-demand.
 
@@ -68,7 +73,7 @@ Cloud infrastructure providers typically give us access to several layers of abs
 - Process → Container
 - **Thread → Function**
 
-The Now Platform focuses on the last one: **the serverless function**. If we think about it in terms of primitives, it closely mirrors a [**thread of computation**](<https://en.wikipedia.org/wiki/Thread_(computing)>).
+The ZEIT Now Platform focuses on the last one: **the serverless function**. If we think about it in terms of primitives, it closely mirrors a [**thread of computation**](<https://en.wikipedia.org/wiki/Thread_(computing)>).
 
 We have typically been able to provision entire computers or orchestrate processes, but a faster, more granular and more parallelizable primitive like the thread has only recently become available.
 
@@ -78,7 +83,7 @@ Lambdas have a lot of benefits over booting up and managing containers or proces
 
 One of the main benefits is that the developer only needs to reason about one concurrent computation happening in the context of their code, despite many of them being able to run in parallel.
 
-In the example above, `api/index.js` handles an incoming request, runs some computation, and responds. If another request comes to the same path, the system will automatically spawn a new isolated function, thus scaling automatically.
+In the example above, `api/date.js` handles an incoming request, runs some computation, and responds. If another request comes to the same path, the system will automatically spawn a new isolated function, thus scaling automatically.
 
 In contrast, processes and containers tend to expose **an entire server** as their entrypoint. That server would then define code for handling **many types of requests**.
 
@@ -88,9 +93,9 @@ Furthermore, if a systemic error occurs when handling an incoming request or eve
 
 ### Per-Entrypoint Granularity
 
-Now makes it trivial to build one serverless function per potential entrypoint of your application. If you are familiar with frontend development, you can think of this as **code-splitting for the backend**.
+ZEIT Now makes it trivial to build one serverless function per potential entrypoint of your application. If you are familiar with frontend development, you can think of this as **code-splitting for the backend**.
 
-In the example above, the three dynamic entrypoints we specified (two Python scripts and the Node.js function) result in three discrete packaged functions that get uploaded and deployed with the [cloud infrastructure provider](/docs/v2/platform/regions-and-providers).
+In the example above, the entrypoint we specified results in a single packaged function that gets uploaded and deployed with the [cloud infrastructure provider](/docs/v2/advanced/platform/regions-and-providers).
 
 This has numerous benefits:
 
@@ -116,7 +121,7 @@ height={1352/2}
 />
 <Caption>A typical request model.</Caption>
 
-With the Now Lambda architecture, the mental model is much simpler. For each incoming request, a new invocation happens.
+With the ZEIT Now Lambda architecture, the mental model is much simpler. For each incoming request, a new invocation happens.
 
 <Image src={`https://assets.zeit.co/image/upload/v1540914224/front/docs/concepts/new-lambda-process.png`}
 width={1262/2}
@@ -136,7 +141,7 @@ Re-using a Lambda means the underlying **container** that hosts it does not get 
 
 It is important to note that Lambdas, even while the underlying container is hot, cannot leave tasks running. If a sub-process is running by the time the response is returned, the entire container is _frozen_. When a new invocation happens, if the container is re-used, it is unfrozen, which allows sub-processes to continue running.
 
-To minimize the latency difference between a cold and boot instantiation, Now aids by:
+To minimize the latency difference between a cold and boot instantiation, ZEIT Now aids by:
 
 - Designing a build system that has a per-entrypoint granularity. This means that when a user hits a particular endpoint, only the code associated to handle that request has to be fetched and booted.
 - Imposing a limit on [max bundle size](#maximum-bundle-size) for each Lambda generated by your deployment's files and file types. Cloud providers allow for a variety of different sized functions, but we have picked one that is aligned with making cold fast instantiation nearly instant for user-facing workloads (such as serving HTTP traffic).
@@ -145,7 +150,7 @@ To minimize the latency difference between a cold and boot instantiation, Now ai
 
 ### CPU / Memory
 
-Now configures Lambdas to have **3008mb** of available memory for builds (those triggered by static site generators or Builds) and output Lambdas. The amount of CPU allocated is proportional to the max memory limit.
+ZEIT Now configures Lambdas to have **3008mb** of available memory for builds (those triggered by static site generators or Builds) and output Lambdas. The amount of CPU allocated is proportional to the max memory limit.
 
 To understand how the CPU allocation will work for your application, we recommend testing and benchmarking.
 
@@ -155,7 +160,7 @@ Each request body has a maximum payload limit of **5mb**.
 
 ### Maximum Bundle Size
 
-**The maximum Lambda size is `50mb`**. If a deployment build tries to create a larger Lambda as an output, the build will fail and therefore so will your deployment (see the [deployment lifecycle](/docs/v2/deployments/concepts/lifecycle) documentation for details).
+**The maximum Lambda size is `50mb`**. If a deployment build tries to create a larger Lambda as an output, the build will fail and therefore so will your deployment.
 
 ### Maximum Execution Duration
 
@@ -163,11 +168,11 @@ A Lambda can execute for at most **5 minutes**. This is not configurable as of n
 
 ### In-memory Caches
 
-It is possible to take advantage of global state from invocation to invocation if the underlying [container is re-used](/docs/v2/platform/regions-and-providers).
+It is possible to take advantage of global state from invocation to invocation if the underlying [container is re-used](/docs/v2/advanced/platform/regions-and-providers).
 
 ### Filesystem
 
-The filesystem is writable inside `/tmp` and persisted if the underlying [container is re-used](/docs/v2/platform/regions-and-providers). The `/tmp` directory is writable for up to `512mb` of storage.
+The filesystem is writable inside `/tmp` and persisted if the underlying [container is re-used](/docs/v2/advanced/platform/regions-and-providers). The `/tmp` directory is writable for up to `512mb` of storage.
 
 ### Logging
 

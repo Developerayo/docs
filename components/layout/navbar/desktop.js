@@ -88,7 +88,8 @@ function Category({ info, level = 1, ...props }) {
       ) : null}
       <style jsx>{`
         .label {
-          font-size: 14px;
+          font-size: var(--font-size-primary);
+          line-height: var(--line-height-primary);
           font-weight: 400;
           cursor: pointer;
           display: flex;
@@ -117,7 +118,8 @@ function Category({ info, level = 1, ...props }) {
         }
 
         .level-2 .label {
-          font-size: 14px;
+          font-size: var(--font-size-primary);
+          line-height: var(--line-height-primary);
           text-transform: none;
           letter-spacing: 0;
           cursor: default;
@@ -322,7 +324,8 @@ export class NavLink extends React.Component {
 
           .nav-link :global(a) {
             text-decoration: none;
-            font-size: 14px;
+            font-size: var(--font-size-primary);
+            line-height: var(--line-height-primary);
             color: var(--accents-6);
             box-sizing: border-box;
           }

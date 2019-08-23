@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { AnchorLink } from '~/components/text/link'
-import { P } from '~/components/text/paragraph'
+import { P } from '~/components/text'
 
 function CaseStudyCard({ icon, description }) {
   const Icon = icon

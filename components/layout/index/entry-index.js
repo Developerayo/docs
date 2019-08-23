@@ -78,8 +78,8 @@ class EntryIndex extends Component {
           a {
             color: #000;
             display: block;
-            font-size: 14px;
-            line-height: 18px;
+            font-size: var(--font-size-primary);
+            line-height: var(--line-height-primary);
             padding: 10px 0 10px 10px;
             position: relative;
             text-decoration: none;

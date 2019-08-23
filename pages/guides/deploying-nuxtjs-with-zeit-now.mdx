@@ -1,0 +1,94 @@
+import Guide from '~/components/layout/guide'
+import { InlineCode } from '~/components/text/code'
+import Caption from '~/components/text/caption'
+import { GenericLink } from '~/components/text/link'
+import Snippet from '~/components/snippet'
+
+export const meta = {
+  title: 'Deploying a Static Nuxt.js App with ZEIT Now',
+  description:
+    'Learn how to create and deploy your static Nuxt.js app with ZEIT Now.',
+  published: '2019-08-06T01:01:52.000Z',
+  authors: ['developerayo', 'msweeneydev'],
+  url: '/guides/deploying-nuxtjs-with-zeit-now',
+  image:
+    'https://og-image.now.sh/**Deploy%20Nuxt.js%20Apps**%20%3Cbr%3E%20with%20ZEIT%20Now.png?theme=light&md=1&fontSize=100px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnow-black.svg&images=https%3A%2F%2Fnuxtjs.org%2Flogos%2Fnuxt-square.svg&widths=250&widths=300&heights=250&heights=300',
+  editUrl: 'pages/guides/deploying-nuxtjs-with-zeit-now.mdx',
+  lastEdited: '2019-08-22T11:20:54.000Z'
+}
+
+[Nuxt.js](https://nuxtjs.org/) is an open-source Vue.js-based framework that provides multiple different rendering modes, one of which allows you generate a static app.
+
+In this guide, you will learn how to create and deploy a Nuxt.js app with [ZEIT Now](/docs/v2).
+
+## Step 1: Set Up Your Nuxt.js Project
+
+The first step in setting up your new Nuxt.js project is to generate it with [`create-nuxt-app`](https://nuxtjs.org/guide/installation/#using-code-create-nuxt-app-code-):
+
+<Snippet dark text="npm create nuxt-app my-nuxt-app" />
+<Caption>
+  Initializing a Nuxt.js project with <InlineCode>create-nuxt-app</InlineCode>{' '}
+  and <GenericLink href="https://www.npmjs.com/">npm</GenericLink>.
+</Caption>
+
+When asked which rendering mode you want to use, select **Single Page App**.
+
+With your Nuxt.js project initialized, move into the directory:
+
+<Snippet dark text="cd my-nuxt-app" />
+<Caption>
+  Using the <InlineCode>cd</InlineCode> command to move into the project
+  directory.
+</Caption>
+
+Before deploying with ZEIT Now, provide Nuxt.js with instructions on which directory the build should be output to. Add the following to your `nuxt.config.js` file:
+
+```json
+{
+  ...
+  "generate": {
+    "dir": "public"
+  }
+}
+```
+
+<Caption>
+  Adding an output directory to the <InlineCode>nuxt.config.js</InlineCode>{' '}
+  file.
+</Caption>
+
+Following that, change the build script in the `package.json` file to the following:
+
+```json
+{
+  "scripts": {
+    ...
+    "build": "nuxt generate"
+  }
+}
+```
+
+<Caption>
+  Adding a <InlineCode>build</InlineCode> script to the
+  <InlineCode>package.json</InlineCode> file.
+</Caption>
+
+## Step 2: Deploying With ZEIT Now
+
+With your Nuxt.js app set up, it is ready to be [deployed](/docs/v2/deployments/basics/) with [ZEIT Now](/docs/v2).
+
+If you have not yet installed ZEIT Now, you can do so by installing [Now CLI](/download).
+
+You are now ready to deploy your app with **just a single command**:
+
+<Snippet dark text="now" />
+<Caption>Deploying your project with just a single command.</Caption>
+
+Once the app is deployed, you will receive a deployment URL similar to the following:
+<https://nuxt-4l3gekrti.now.sh/>
+
+export default ({ children }) => <Guide meta={meta}>{children}</Guide>
+
+export const config = {
+  amp: 'hybrid'
+}

@@ -27,7 +27,8 @@ const NavigationItem = ({
       .navigation-item :global(a) {
         color: #666;
         display: inline-block;
-        font-size: 14px;
+        font-size: var(--font-size-small);
+        line-height: var(--line-height-small);
         font-weight: normal;
         padding: 0 8px;
         text-decoration: none;
@@ -48,7 +49,8 @@ const NavigationItem = ({
 
       @media screen and (max-width: 950px) {
         .navigation-item :global(a) {
-          font-size: 14px;
+          font-size: var(--font-size-small);
+          line-height: var(--line-height-small);
         }
       }
     `}</style>

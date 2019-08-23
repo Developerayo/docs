@@ -173,7 +173,8 @@ export const LabeledExternalLink = ({
         border-radius: 4px;
         background: white;
         border: 1px solid #dddddd;
-        font-size: 14px;
+        font-size: var(--font-size-primary);
+        line-height: var(--line-height-primary);
         line-height: 1.8;
         transition: border 0.2s ease, color 0.2s ease;
         vertical-align: middle;

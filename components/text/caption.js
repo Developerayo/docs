@@ -1,16 +1,14 @@
-import { FONT_FAMILY_MONO } from '~/lib/css-config'
-
 const Caption = ({ children, ...props }) => (
   <p {...props}>
     {children}
     <style jsx>
       {`
         p {
-          color: #999;
-          font-size: 12px;
+          color: var(--accents-5);
+          font-size: var(--font-size-small);
+          line-height: var(--line-height-small);
           margin: -24px 0 40px 0;
           text-align: center;
-          line-height: 2;
         }
       `}
     </style>
@@ -24,7 +22,7 @@ const Code = ({ children }) => (
       {`
         code {
           color: #666;
-          font-family: ${FONT_FAMILY_MONO};
+          font-family: var(--font-mono);
         }
 
         code::before {

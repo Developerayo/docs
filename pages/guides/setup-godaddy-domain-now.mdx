@@ -4,17 +4,16 @@ import { InlineCode } from '~/components/text/code'
 import { Image } from '~/components/media'
 import Caption from '~/components/text/caption'
 import { GenericLink } from '~/components/text/link'
-import Card from '~/components/card'
 
 export const meta = {
   title: 'Setup a GoDaddy Domain with ZEIT Now',
   description:
-    'Use your GoDaddy registered domain as an alias for your ZEIT Now deployments.',
+    'Learn how to use your GoDaddy registered domain as an alias for your ZEIT Now deployments.',
   published: '2019-01-23T17:00:00.860Z',
   authors: ['timothy'],
   url: '/guides/setup-godaddy-domain-now',
   editUrl: 'pages/guides/setup-godaddy-domain-now.mdx',
-  lastEdited: '2019-08-07T16:34:16.000Z'
+  lastEdited: '2019-08-22T09:01:17.000Z'
 }
 
 With Now, you can [assign a domain name](/docs/v2/custom-domains#deploying-with-your-domain) to any of your [deployments](/docs/v2/deployments/basics/) by aliasing. If you have a domain registered on another service, such as GoDaddy, you must first [point your domain to Now](/guides/zero-downtime-domain-migration/) in order to alias your deployments.
@@ -118,9 +117,9 @@ For example, adding a set of Gmail MX records with the `now dns add` command:
 
 ### Aliasing a Deployment
 
-ZEIT Now is dedicated to making deployment easy. If you have not yet deployed an application, take a look at the [Deployment Basics](/docs/v2/deployments/basics) documentation or at some other [guides](/guides) or [examples](/examples) to get started. The aliasing process will also generate a free SSL certificate for your domain.
+ZEIT Now is dedicated to making deployment easy. If you have not yet deployed an app, take a look at the [Deployment Basics](/docs/v2/deployments/basics) documentation or at some other [guides](/guides) or [examples](/examples) to get started. The aliasing process will also generate a free SSL certificate for your domain.
 
-When you are ready to deploy and alias, using the [`alias`](/docs/v2/deployments/configuration#alias) property containing your domain, within your [`now.json`](/docs/v2/deployments/configuration) file.
+When you are ready to deploy and alias, using the [`alias`](/docs/v2/advanced/configuration#alias) property containing your domain, within your [`now.json`](/docs/v2/advanced/configuration) file.
 
 ```json
 {
@@ -130,18 +129,16 @@ When you are ready to deploy and alias, using the [`alias`](/docs/v2/deployments
 
 <Caption>
   Adding an{' '}
-  <GenericLink href="/docs/v2/deployments/configuration/#alias">
-    alias
-  </GenericLink>{' '}
+  <GenericLink href="/docs/v2/advanced/configuration/#alias">alias</GenericLink>{' '}
   to your project's <InlineCode>now.json</InlineCode> file.
 </Caption>
 
 You can deploy and set up an alias to your domain with one command:
 
-<Snippet dark text="now --target production" />
+<Snippet dark text="now --prod" />
 <Caption>Deploying a project to a production alias.</Caption>
 
-We highly recommend using either the [Now for GitHub](/docs/v2/integrations/now-for-github/) or [Now for GitLab](/docs/v2/integrations/now-for-gitlab/) apps coupled with the same [`alias` configuration option](/docs/v2/deployments/configuration/#alias) which will allow your application to be deployed on push to your GitHub repository and aliased automatically when merged to the default branch.
+We highly recommend using either the [Now for GitHub](/docs/v2/advanced/now-for-github/) or [Now for GitLab](/docs/v2/advanced/now-for-gitlab/) apps coupled with the same [`alias` configuration option](/docs/v2/advanced/configuration/#alias) which will allow your app to be deployed on push to your GitHub repository and aliased automatically when merged to the default branch.
 
 ## Step 3: Pointing to Now
 
@@ -159,28 +156,9 @@ To set your nameservers, on the DNS management page as you added the TXT record,
 />
 <Caption style={{marginTop: '-48px'}}>Changing nameservers with GoDaddy's DNS management settings.</Caption>
 
-Once GoDaddy propagates the changes to the domain with the updated nameservers, your domain will then point to the [application you deployed](#aliasing-a-deployment) before.
+Once GoDaddy propagates the changes to the domain with the updated nameservers, your domain will then point to the [app you deployed](#aliasing-a-deployment) before.
 
-That's all. Your domain is successfully migrated to using ZEIT DNS and pointing to your Now deployed application.
-
-## Read More
-
-For more information on how you can extend your usage of Now, read the following guides and documentation:
-
-<Card title="www. Redirect" href="/guides/redirect-from-www">
-  Create a redirect from the www. subdomain to your naked domain.
-</Card>
-
-<Card
-  title="Aliasing"
-  href="/docs/v2/custom-domains#deploying-with-your-domain"
->
-  Learn more about aliasing to your deployments.
-</Card>
-
-<Card title="Deploying Basics" href="/docs/v2/deployments/basics">
-  Deploy any of your applications with ZEIT Now.
-</Card>
+That's all. Your domain is successfully migrated to using ZEIT DNS and pointing to your Now deployed app.
 
 export default ({ children }) => <Guide meta={meta}>{children}</Guide>
 

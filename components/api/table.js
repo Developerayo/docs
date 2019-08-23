@@ -154,9 +154,9 @@ export function Cell({ children, isHead, center }) {
           th {
             padding: 12px 20px 12px 0;
             color: #999;
-            font-size: 12px;
+            font-size: var(--font-size-small);
+            line-height: var(--line-height-small);
             font-weight: normal;
-            line-height: 24px;
             text-align: left;
             text-transform: uppercase;
             vertical-align: top;
@@ -176,9 +176,9 @@ export function Cell({ children, isHead, center }) {
         {children}
         <style jsx>{`
           td {
-            border-bottom: 1px solid #eaeaea;
-            font-size: 14px;
-            line-height: 24px;
+            border-bottom: 1px solid var(--accents-2);
+            font-size: var(--font-size-small);
+            line-height: var(--line-height-small);
             padding: 12px 20px 12px 0;
             vertical-align: top;
           }

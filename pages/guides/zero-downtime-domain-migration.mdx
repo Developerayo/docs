@@ -2,32 +2,30 @@ import Guide from '~/components/layout/guide'
 import Snippet from '~/components/snippet'
 import { Image } from '~/components/media'
 import Caption from '~/components/text/caption'
-import Card from '~/components/card'
 import { GenericLink } from '~/components/text/link'
 import Note from '~/components/text/note'
 import { InlineCode } from '~/components/text/code'
-import { P } from '~/components/text/paragraph'
 
 export const meta = {
-  title: 'Zero-Downtime Domain Migration',
+  title: 'Zero-Downtime Domain Migration with ZEIT Now',
   description:
-    'Migrating your domain from an external service to ZEIT with no downtime, in just a few steps.',
+    'Learn how to migrate your domain from an external service to ZEIT Now with no downtime, in just a few steps.',
   published: '2019-07-11T17:00:00.860Z',
   authors: ['msweeneydev'],
   url: '/guides/zero-downtime-domain-migration',
   editUrl: 'pages/guides/zero-downtime-domain-migration.mdx',
-  lastEdited: '2019-08-06T15:31:27.000Z'
+  lastEdited: '2019-08-22T09:01:17.000Z'
 }
 
 When migrating to another set of nameservers, there can often be downtime incurred. In this guide we will walk you through adding your domain to ZEIT and setting it up before migrating the nameservers, ensuring no downtime at any point.
 
 <Note warning>
-  We <P.B>strongly advise against using external verification</P.B> as it
-  prevents you from receiving the full benefits of ZEIT's platform and services,
-  such as the automatic renewal of wildcard certificates. Furthermore, many DNS
+  We <b>strongly advise against using external verification</b> as it prevents
+  you from receiving the full benefits of ZEIT's platform and services, such as
+  the automatic renewal of wildcard certificates. Furthermore, many DNS
   providers{' '}
-  <P.B>do not have a global connection capable of low-latency geo-routing</P.B>,
-  which is likely to <P.B>slow down your applications</P.B>.
+  <b>do not have a global connection capable of low-latency geo-routing</b>,
+  which is likely to <b>slow down your apps</b>.
 </Note>
 
 ## Step 1: Adding and Verifying Your Domain
@@ -59,7 +57,7 @@ With your domain provider, create the TXT record using the `name` (also known as
   If you have forgotten or misplaced the value before verifying the domain, you
   can use{' '}
   <InlineCode>
-    now domains inspect <P.B>domain</P.B>
+    now domains inspect <b>domain</b>
   </InlineCode>{' '}
   to retrieve the verification methods and value again.
 </Note>
@@ -75,9 +73,9 @@ With your domain provider, create the TXT record using the `name` (also known as
 />
 <Caption>Verifying a domain with <GenericLink href="/now">Now CLI</GenericLink>.</Caption>
 
-## Step 2: Preparing the Domain with DNS, Certs, Deploying, and aliasing
+## Step 2: Preparing the Domain with DNS, Certs, and Deploying to Production
 
-Now that your domain is verified, you have more control over it with Now. You can now generate an SSL Certificate, add any DNS Records, and deploy and alias your application, all ready for when you switch over fully.
+Now that your domain is verified, you have more control over it with Now. You can now generate an SSL Certificate, add any DNS Records, and deploy your app using your domain, all ready for when you switch over fully.
 
 ### Generating an SSL Certificate
 
@@ -108,31 +106,42 @@ In this example, we'll take Gmail's current MX records and add them with Now CLI
 
 The above demonstrates using the `now dns add` command to add multiple MX record to your domain.
 
-### Deploying and Aliasing
+### Deploying with Your Custom Domain
 
-You can deploy your app with [Now](/docs/v2/getting-started/installation/) once the domain has been successfully added to your account.
+To use your custom domain with your project, you can add it to your project from the **Domains** section of the project dashboard.
 
-<Card title="Deployment Basics" href="/docs/v2/deployments/basics">
-  Learn more about deploying your apps with Now.
-</Card>
-
-Using the [`alias`](/docs/v2/deployments/configuration/#alias) property inside of a [`now.json` file](/docs/v2/deployments/configuration), you can [automatically alias a deployment to your domain](/docs/v2/custom-domains#deploying-with-your-domain) by using the following Now CLI command in your terminal:
-
-<Snippet dark text="now --target production" />
-<Caption>Deploying and aliasing a deployment with <GenericLink href="/now">Now CLI</GenericLink>.</Caption>
-
-<Note>
-  You can automatically alias your domain to staging and production aliases with
-  just one command:{' '}
-  <GenericLink href="/docs/v2/custom-domains#deploying-with-your-domain">
-    Aliasing a Deployment
+<Note hint>
+  A project is defined when first deploying (using the directory name), or when
+  creating a project from your dashboard. You can read more about them in the{' '}
+  <GenericLink href="/docs/v2/advanced/platform/projects/">
+    projects documentation
   </GenericLink>
   .
 </Note>
 
-Using the `alias` property, your projects will automatically alias to your domain when merging or pushing to the default branch when using either [Now for GitHub](/docs/v2/integrations/now-for-gitlab) or [Now for GitLab](/docs/v2/integrations/now-for-gitlab).
+To do this, select your project from the dashboard and click the **Domains** tab. Here you will find an input to add your custom domains for production, such as `timothy.now.sh` or `my-zeit-domain.com`.
 
-Now your domain will be pointing to your latest deployment and your are ready to move your nameservers across to show that deployment.
+If the domain is **registered to your account and available for use** it will be indicated below the input box and you can continue. Otherwise, if the domain is **not registered to your account**, it will automatically be added and we will attempt to verify it for you.
+
+When the domain is verified and you're ready to deploy your project to production, you can use the production target with Now CLI in your terminal:
+
+<Snippet dark text="now --prod" />
+<Caption>Deploying a project to production with Now CLI.</Caption>
+
+<Note>
+  Your projects will automatically use your custom domain when merging or
+  pushing to the default branch when using either{' '}
+  <GenericLink href="/docs/v2/integrations/now-for-gitlab">
+    Now for GitHub
+  </GenericLink>{' '}
+  or{' '}
+  <GenericLink href="/docs/v2/integrations/now-for-gitlab">
+    Now for GitLab
+  </GenericLink>
+  .
+</Note>
+
+Now, your domain will be pointing to your latest deployment and you're are ready to move your nameservers across to show that deployment.
 
 ## Step 3: Moving the Nameservers
 
@@ -140,26 +149,7 @@ Once your domain is set up correctly and contains all you need for a successful 
 
 Using `now domains inspect <domain>`, you can find your intended set of nameservers to use with your domain, in case you have forgotten them when you first added the domain.
 
-Once the nameservers have been added and propagation is complete, your domain will successfully point to your aliased deployment from your domain, which includes a free SSL certificate and any DNS records you setup!
-
-## Read More
-
-For more information on how you can extend your usage of Now, read the following guides and documentation:
-
-<Card title="Deployment Basics" href="/docs/v2/deployments/basics">
-  Learn more about deploying your apps with Now.
-</Card>
-
-<Card
-  title="Aliasing"
-  href="/docs/v2/custom-domains#deploying-with-your-domain"
->
-  Alias your deployments with your newly migrated domain.
-</Card>
-
-<Card title="DNS" href="/docs/v2/advanced/domains/dns">
-  Using Now to handle the DNS of your domain.
-</Card>
+Once the nameservers have been added and propagation is complete, your domain will successfully point to your deployment from your domain, which includes a free SSL certificate and any DNS records you setup!
 
 export default ({ children }) => <Guide meta={meta}>{children}</Guide>
 

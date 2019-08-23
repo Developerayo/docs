@@ -3,7 +3,6 @@ import Now from '~/components/text/now'
 import { Image } from '~/components/media'
 import { TerminalInput } from '~/components/text/terminal'
 import Note from '~/components/text/note'
-import { P } from '~/components/text/paragraph'
 
 export const meta = {
   title: 'Global Scaling',
@@ -11,7 +10,7 @@ export const meta = {
     'Scaling your deployments to be instances in multiple global locations with Now',
   date: '01 Apr 2018',
   editUrl: 'pages/docs/v1/features/scaling.mdx',
-  lastEdited: '2019-08-06T15:31:27.000Z'
+  lastEdited: '2019-08-16T15:05:32.000Z'
 }
 
 In this feature guide, you will learn how to globally distribute
@@ -49,18 +48,25 @@ following terms (sorted by least granular to most granular):
 
 After you have decided to enable your deployment in
 a certain part of the world, regions are the best way to
-tell <Now color="#000"/> where exactly it should scale
+tell Now where exactly it should scale
 your deployment to.
 
-<Now color="#000"/> provides a number of regions, each of which
-consists of one or more [data centers](#data-centers):
+Now provides a number of regions, each of which
+consists of one or more [data centers](#data-centers).
 
-Currently, these regions are generally available:
+Now 1.0 runs in two regions:
 
-- [BRU](https://bru.now.sh) (Brussels, Belgium, West Europe)
-- [SFO](https://sfo.now.sh) (San Francisco, West US)
-- [GRU](https://gru.now.sh) (São Paulo, Brazil)
-- [IAD](https://iad.now.sh) (Washington DC, East US)
+- `bru1` - Brussels, Belgium
+- `sfo1` - San Francisco, USA
+
+However, static content is cached in all edge regions. You can find the full list of regions in the [regions and providers documentation](https://zeit.co/docs/v2/network/regions-and-providers/).
+
+<Note>
+  Now 2.0 deployments have a larger range of regions for Serverless Functions to
+  Now 2.0 deployments have a larger range of regions to run Serverless
+  Functions. Executing code closer to your customers will improve their
+  experience by reducing latency.
+</Note>
 
 #### Data Centers
 
@@ -122,8 +128,8 @@ enable it in both BRU and SFO, pass both regions to the command:
 
 <Note>
   For the best performance, you should choose the region(s){' '}
-  <P.B>in closest proximity</P.B> to your datasources and/or where your audience
-  is based.
+  <b>in closest proximity</b> to your datasources and/or where your audience is
+  based.
 </Note>
 
 ### Pre-Defining Scaling Rules

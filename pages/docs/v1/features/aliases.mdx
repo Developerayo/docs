@@ -1,7 +1,7 @@
 import Doc from '~/components/layout/docs'
 import Now from '~/components/text/now'
 import { GenericLink } from '~/components/text/link'
-import { P } from '~/components/text/paragraph'
+import { P } from '~/components/text'
 import { Image } from '~/components/media'
 import { InlineCode } from '~/components/text/code'
 import {
@@ -16,7 +16,7 @@ export const meta = {
     'All you need to know about assigning domains to your Now deployments',
   date: '21 Feb 2017',
   editUrl: 'pages/docs/v1/features/aliases.mdx',
-  lastEdited: '2019-08-06T15:31:27.000Z'
+  lastEdited: '2019-08-15T13:37:26.000Z'
 }
 
 This guide covers how to assign two types of domains to your <Now color="#000"/> deployments.
@@ -29,7 +29,7 @@ This guide covers how to assign two types of domains to your <Now color="#000"/>
 Whenever you deploy to <Now color="#000"/>, the URL you get in return looks something like:
 
 <TerminalOutput>
-  https://<P.B>get-started-basic</P.B>-<P.B>etjnigdrkz</P.B>.now.sh
+  https://<b>get-started-basic</b>-<b>etjnigdrkz</b>.now.sh
 </TerminalOutput>
 
 We can split the above URL into few parts:
@@ -59,8 +59,7 @@ For example, let's say you want `https://get-started-basic-etjnigdrkz.now.sh` to
 All you have to do is run:
 
 <TerminalInput>
-  now alias https://get-started-basic-etjnigdrkz.now.sh{' '}
-  <P.B>get-started-basic</P.B>
+  now alias https://get-started-basic-etjnigdrkz.now.sh <b>get-started-basic</b>
 </TerminalInput>
 
 <TerminalOutput>
@@ -101,7 +100,7 @@ As seen in the output, each alias receives a unique identifier. In the example a
 It's usually known as the **deployment ID**, which is also accessible when you list your deployments with `now ls`. It can be used in substitution of the URL when running `now alias`:
 
 <TerminalInput>
-  now alias <P.B>xpvB6GZWMR6Q9Oxe3c64Htgq</P.B> get-started-basic
+  now alias <b>xpvB6GZWMR6Q9Oxe3c64Htgq</b> get-started-basic
 </TerminalInput>
 
 For convenience, we parse the URLs you supply as parameters to `now alias` to extract the hostname, which means the following are all valid **source URLs**:

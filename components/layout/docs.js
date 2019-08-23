@@ -16,12 +16,8 @@ import DocsNavbarDesktop from '~/components/layout/navbar/desktop'
 import ToggleGroup, { ToggleItem } from '~/components/toggle-group'
 import { GenericLink } from '~/components/text/link'
 import components from '~/lib/mdx-components'
-import H1 from '~/components/text/h1'
-import H2 from '~/components/text/h2'
-import H3 from '~/components/text/h3'
-import H4 from '~/components/text/h4'
+import { H1, H2, H3, H4 } from '~/components/text'
 import HR from '~/components/text/hr'
-import { P } from '~/components/text/paragraph'
 import dataV1 from '~/lib/data/v1/docs'
 import dataV2 from '~/lib/data/v2/docs'
 import Select from '~/components/select'
@@ -94,8 +90,8 @@ const VersionSelect = ({ onChange, version }) => {
         isAmp ? `change:AMP.navigateTo(url='${href}', target=_top)` : undefined
       }
     >
-      <option value="v1">v1</option>
-      <option value="v2">v2 (Latest)</option>
+      <option value="v1">1.0</option>
+      <option value="v2">2.0 (Latest)</option>
     </Select>
   )
   if (!isAmp) return curSelect
@@ -188,11 +184,7 @@ class withDoc extends React.Component {
                 </ToggleGroup>
               </div>
 
-              <DocsNavbarDesktop
-                data={versionData}
-                url={router}
-                scrollSelectedIntoView={true}
-              />
+              <DocsNavbarDesktop data={versionData} url={router} />
 
               <h5 className="platform-select-title">Now Platform Version</h5>
               <VersionSelect
@@ -204,7 +196,7 @@ class withDoc extends React.Component {
               <div className="heading content-heading">
                 {version === 'v1' && (
                   <Note>
-                    This documentation is for <P.B>version 1</P.B> of the Now
+                    This documentation is for <b>version 1</b> of the Now
                     platform. For the latest features, please see{' '}
                     <GenericLink href="/docs/v2">
                       the version 2 documentation
@@ -251,7 +243,8 @@ class withDoc extends React.Component {
             }
 
             .platform-select-title {
-              font-size: 14px;
+              font-size: var(--font-size-primary);
+              line-height: var(--line-height-primary);
               font-weight: 400;
               margin-bottom: 16px;
               margin-top: 32px;

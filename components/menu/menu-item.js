@@ -26,8 +26,8 @@ class MenuItem extends Component {
             align-items: center;
             color: #999;
             display: flex;
-            font-size: 14px;
-            line-height: 17px;
+            font-size: var(--font-size-primary);
+            line-height: var(--line-height-primary);
             padding: 8px 20px;
             position: relative;
             white-space: nowrap;

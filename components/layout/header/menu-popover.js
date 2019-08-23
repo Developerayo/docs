@@ -31,7 +31,8 @@ export class MenuPopOver extends Component {
       secondaryTitle,
       primaryList,
       secondaryList,
-      blogItem
+      blogItem,
+      offsetArrowLeft
     } = this.props
     const contentWidth = primaryList && secondaryList ? 480 : 160
     return (
@@ -53,7 +54,9 @@ export class MenuPopOver extends Component {
           offsetTop={0}
           to={
             <PopOver.Menu
-              tipOffset={dashboard ? 58 : 60}
+              tipOffset={
+                offsetArrowLeft ? offsetArrowLeft : dashboard ? 58 : 60
+              }
               noPadding
               width={dashboard ? 140 : contentWidth}
             >
@@ -182,7 +185,8 @@ export class MenuPopOver extends Component {
             visibility: hidden;
             user-select: none;
             border: 0;
-            font-size: 14px;
+            font-size: var(--font-size-small);
+            line-height: var(--line-height-small);
             color: #666;
             padding: 0 8px;
             transition: all 200ms ease;
@@ -209,7 +213,8 @@ export class MenuPopOver extends Component {
             color: #ff0080;
           }
           a {
-            font-size: 14px;
+            font-size: var(--font-size-small);
+            line-height: var(--line-height-small);
             text-decoration: none;
           }
           .tag {

@@ -3,9 +3,7 @@ import formatDate from 'date-fns/format'
 import Layout from '~/components/layout/layout'
 import Head from '~/components/layout/head'
 import Wrapper from '~/components/layout/wrapper'
-import H1 from '~/components/text/h1'
-import H4 from '~/components/text/h4'
-import { P } from '~/components/text/paragraph'
+import { H1, H4, P } from '~/components/text'
 import { AvatarGroup } from '~/components/avatar'
 import { GenericLink } from '~/components/text/link'
 import Button from '~/components/buttons'
@@ -211,7 +209,8 @@ const Guides = () => (
 
       .date {
         color: #666;
-        font-size: 14px;
+        font-size: var(--font-size-primary);
+        line-height: var(--line-height-primary);
       }
 
       @media (max-width: 768px) {

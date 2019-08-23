@@ -1,5 +1,5 @@
 import React from 'react'
-import { PDIV } from '../text/paragraph'
+import { P } from '../text'
 
 export default class Example extends React.PureComponent {
   render() {
@@ -7,7 +7,7 @@ export default class Example extends React.PureComponent {
 
     return (
       <div className="example">
-        <PDIV>{children}</PDIV>
+        <P>{children}</P>
 
         <style jsx>{`
           .example {
@@ -25,16 +25,16 @@ export default class Example extends React.PureComponent {
             color: #fff;
           }
 
-          .example :global(> div) {
+          .example :global(> p) {
             margin-bottom: 0;
             margin-top: 0;
           }
 
-          .example :global(> div > *:first-child) {
+          .example :global(> p > *:first-child) {
             margin-top: 0;
           }
 
-          .example :global(> div > *:last-child) {
+          .example :global(> p > *:last-child) {
             margin-bottom: 0;
           }
 

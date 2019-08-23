@@ -122,7 +122,8 @@ class SectionIndex extends Component {
           .title {
             color: #000;
             display: block;
-            font-size: 14px;
+            font-size: var(--font-size-primary);
+            line-height: var(--line-height-primary);
             padding: 10px 0;
             text-decoration: none;
           }

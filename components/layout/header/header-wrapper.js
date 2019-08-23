@@ -19,12 +19,19 @@ const Header = ({
         width: 100%;
         z-index: 1000;
         top: 0;
+        transition: all 0.2s ease;
       }
 
       header > :global(.content) {
         align-items: center;
         display: flex;
         height: 100%;
+      }
+
+      @media (max-width: 950px) {
+        header {
+          position: absolute;
+        }
       }
     `}</style>
     <style jsx>{`
@@ -35,13 +42,6 @@ const Header = ({
           ? 'transparent'
           : '#fff'};
         box-shadow: ${detached ? 'var(--shadow-small)' : 'none'};
-        transition: all 0.2s ease;
-      }
-
-      @media (max-width: 950px) {
-        header {
-          position: absolute;
-        }
       }
 
       @media (max-width: 640px) {

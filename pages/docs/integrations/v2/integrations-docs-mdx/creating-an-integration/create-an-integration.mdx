@@ -2,13 +2,13 @@ import { Code, InlineCode } from '~/components/text/code'
 import Note from '~/components/text/note'
 import Caption from '~/components/text/caption'
 import { Image } from '~/components/media'
-import { P } from '~/components/text/paragraph'
+import { Span } from '~/components/text'
 import { GenericLink } from '~/components/text/link'
 
 export const meta = {
   editUrl:
     'pages/docs/integrations/v2/integrations-docs-mdx/creating-an-integration/create-an-integration.mdx',
-  lastEdited: '2019-08-06T15:31:27.000Z'
+  lastEdited: '2019-08-15T13:37:26.000Z'
 }
 
 ## Step 3: Creating Your Integration
@@ -32,11 +32,11 @@ Complete the form and at the end you will find two fields named:
 For now, you can leave the Redirect URL empty and add <http://localhost:5005> to the **UI Hook URL** field.
 
 <Note warning>
-We recommend using <P.B>Google Chrome</P.B> for local UIHook development.
+We recommend using <b>Google Chrome</b> for local UIHook development.
 
 To work with UIHooks using either Safari or Firefox, you will require the use of a tunnelling service such as <GenericLink href="https://ngrok.com/">ngrok</GenericLink>.
 
-When using <InlineCode>ngrok</InlineCode>, the command <InlineCode>ngrok http 5000</InlineCode> will provide you with an address that can be used in the <P.B>UI Hook URL</P.B> field.
+When using <InlineCode>ngrok</InlineCode>, the command <InlineCode>ngrok http 5000</InlineCode> will provide you with an address that can be used in the <b>UI Hook URL</b> field.
 
 </Note>
 
@@ -51,4 +51,4 @@ Clicking this button will take you the **Public URL** for your Integration. This
 The Public URL has the following format:
 
 <Code>https://zeit.co/integrations/:slug</Code>
-<Caption>An example <P.B>Public URL</P.B> for an Integration.</Caption>
+<Caption>An example <b>Public URL</b> for an Integration.</Caption>

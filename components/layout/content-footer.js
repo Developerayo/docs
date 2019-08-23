@@ -10,13 +10,14 @@ const ContentFooter = ({ lastEdited, editUrl }) => (
 
     <style jsx>{`
       footer {
-        border-top: 1px solid #eaeaea;
+        border-top: 1px solid var(--accents-2);
         display: flex;
         justify-content: space-between;
         margin-top: 40px;
         padding: 24px 0;
-        font-size: 12px;
-        color: #666666;
+        font-size: var(--font-size-small);
+        line-height: var(--line-height-small);
+        color: var(--accents-5);
       }
 
       @media (max-width: 400px) {

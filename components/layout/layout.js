@@ -5,19 +5,20 @@ import Header from '~/components/layout/header'
 import { UserContext } from '~/lib/user-context'
 import { ZenContext } from '~/lib/zen-context'
 import UseTeamInfo from '~/lib/use-team-info'
+import { withToasts } from '~/components/toasts'
 
 const LayoutHeader = React.memo(props => {
   const isAmp = useAmp()
   return <Header {...props} isAmp={isAmp} />
 })
 
-export default class Layout extends React.Component {
+class Layout extends React.Component {
   static contextType = ZenContext
 
   state = {
     navigationActive: false,
     zenModeActive: false,
-    scrollPosition: 0,
+    scrollPosition: (typeof window !== 'undefined' && window.pageYOffset) || 0,
     scrollDirection: null
   }
 
@@ -146,3 +147,5 @@ export default class Layout extends React.Component {
     )
   }
 }
+
+export default withToasts(Layout)

@@ -6,7 +6,7 @@ import { getToken } from '~/lib/authenticate'
 import { API_DOCS_FEEDBACK } from '~/lib/constants'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
-import H5 from '~/components/text/h5'
+import { H5 } from '~/components/text'
 
 const EMOJIS = new Map([
   ['🤩', 'f929'],

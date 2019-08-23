@@ -115,7 +115,8 @@ export const Item = ({
 
         .item {
           position: relative;
-          font-size: 14px;
+          font-size: var(--font-size-small);
+          line-height: var(--line-height-small);
           color: var(--accents-3);
           font-family: var(--font-sans);
           line-height: 20px;

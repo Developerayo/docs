@@ -2,11 +2,11 @@ import Example from '~/components/example'
 import { TerminalInput } from '~/components/text/terminal'
 import { GenericLink } from '~/components/text/link'
 import { Code } from '~/components/text/code'
-import { Quote, P } from '~/components/text/paragraph'
+import Quote from '~/components/text/quote'
 
 export const meta = {
   editUrl: 'pages/docs/api/v1/api-docs-mdx/api-basics/authentication.mdx',
-  lastEdited: '2019-08-06T15:31:27.000Z'
+  lastEdited: '2019-08-15T13:57:53.000Z'
 }
 
 ## Authentication
@@ -24,7 +24,7 @@ If the authentication is unsuccessful, the status code **403** is returned.
   </Code>
   <Code>https://api.zeit.co/example?teamId=team_123</Code>
   <Quote>
-    <P.B>Note:</P.B>{' '}
+    <b>Note:</b>{' '}
     {props.user
       ? "Since you're logged in, "
       : [

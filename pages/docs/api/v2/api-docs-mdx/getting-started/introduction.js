@@ -181,7 +181,8 @@ class Introduction extends React.PureComponent {
           }
 
           p {
-            font-size: 14px;
+            font-size: var(--font-size-primary);
+            line-height: var(--line-height-primary);
             text-align: center;
             margin: 24px 0;
           }

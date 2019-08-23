@@ -188,6 +188,11 @@
       "headers": { "Location": "https://github.com/zeit/now-examples" }
     },
     {
+      "src": "/docs/v1/examples/.*",
+      "status": 301,
+      "headers": { "Location": "https://github.com/zeit/now-examples" }
+    },
+    {
       "src": "/docs/other/(.*)",
       "status": 301,
       "headers": { "Location": "/docs/v1/other/$1" }
@@ -242,7 +247,9 @@
     {
       "src": "/docs/version-detection",
       "status": 301,
-      "headers": { "Location": "/docs/v2/advanced/platform/frequently-asked-questions#platform-version-detection" }
+      "headers": {
+        "Location": "/docs/v2/advanced/platform/frequently-asked-questions#platform-version-detection"
+      }
     },
     { "src": "(.*)", "dest": "$1" }
   ]

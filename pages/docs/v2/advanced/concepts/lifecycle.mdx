@@ -9,14 +9,14 @@ export const meta = {
   description:
     'An in-depth look at the concept of a deployment lifecycle on the ZEIT Now platform.',
   editUrl: 'pages/docs/v2/advanced/concepts/lifecycle.mdx',
-  lastEdited: '2019-08-06T15:31:27.000Z'
+  lastEdited: '2019-08-21T15:24:05.000Z'
 }
 
 The lifecycle of a deployment determines its readiness to accept user requests and serve traffic.
 
 From an [API](/docs/api) standpoint, each deployment has a `readyState` field which can take one of the following values:
 
-- `INITIALIZING` a deployment in this state is waiting on [builds](/docs/v2/deployments/builds) to complete
+- `INITIALIZING` a deployment in this state is waiting on [Builds](/docs/v2/advanced/builders) to complete
   - `ERROR` one or more builds failed
   - `READY` builds completed successfully or none were specified
 
@@ -26,27 +26,27 @@ height={185}
 />
 <Caption>An illustration of the deployment <InlineCode>readyState</InlineCode> lifecycle.</Caption>
 
-When a deployment is `READY`, our system guarantees that it can be served at any time and that all the underlying serverless functions are available in the specified [regions](/docs/v2/platform/regions-and-providers).
+When a deployment is `READY`, our system guarantees that it can be served at any time and that all the underlying serverless functions are available in the specified [regions](/docs/v2/advanced/platform/regions-and-providers).
 
 No further state transitions are necessary, and all deployment entrypoints are expected to be served within milliseconds.
 
 #### Builds Lifecycle
 
-When a deployment has more than one underlying [builds](/docs/v2/deployments/builds), each build has its own states and lifecycle.
+When a deployment has more than one underlying builds, each build has its own states and lifecycle.
 
-Now CLI displays and updates the evolution of the builds' states until the deployment completes.
+[Now CLI](/download) displays and updates the evolution of the builds' states until the deployment completes.
 
 <Image src={`https://assets.zeit.co/image/upload/v1540855037/front/docs/concepts/builds-lifecycle.svg`}
 width={1048}
 height={396}
 />
-<Caption>An illustration of a <GenericLink href="/docs/v2/deployments/builds">build's</GenericLink> lifecycle.</Caption>
+<Caption>An illustration of a <GenericLink href="/docs/v2/advanced/builders">build's</GenericLink> lifecycle.</Caption>
 
 Each build process goes through:
 
 - `INITIALIZING` the initial state
 - `ANALYZING` to determine if the build has to be performed or it can be de-duplicated
-  - `BUILDING` while executing the [Builder](/docs/v2/deployments/builders/overview) code
+  - `BUILDING` while executing the [Builder](/docs/v2/advanced/builders) code
     - `UPLOADING` to upload the files and resulting lambdas
       - `DEPLOYING` to deploy the necessary files and functions
         - `READY` if the deployment is successful

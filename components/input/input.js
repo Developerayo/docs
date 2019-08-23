@@ -1,7 +1,6 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
-import { FONT_FAMILY_SANS } from '~/lib/css-config'
 
 class Input extends Component {
   static propTypes = {
@@ -157,9 +156,9 @@ class Input extends Component {
             box-shadow: none;
             box-sizing: border-box;
             display: block;
-            font-family: ${FONT_FAMILY_SANS};
-            font-size: 14px;
-            line-height: 27px;
+            font-family: var(--font-sans);
+            font-size: var(--font-size-primary);
+            line-height: var(--line-height-primary);
             outline: 0;
             width: 100%;
           }

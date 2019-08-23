@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 // Components
-import { FONT_FAMILY_SANS } from '~/lib/css-config'
 import Button from '~/components/buttons'
 import EmojiIcon from '~/components/icons/emoji'
 import ClickOutside from '~/components/click-outside'
@@ -333,7 +332,7 @@ class HeaderFeedback extends Component {
                   width: 84px;
                   display: inline-block;
                   transition: all 150ms ease-out;
-                  font-family: ${FONT_FAMILY_SANS};
+                  font-family: var(--font-sans);
                   text-rendering: optimizeLegibility;
                   -webkit-font-smoothing: antialiased;
                 }
@@ -346,7 +345,7 @@ class HeaderFeedback extends Component {
                   line-height: 26px;
                   font-size: 12px;
                   border-radius: 4px;
-                  font-family: ${FONT_FAMILY_SANS};
+                  font-family: var(--font-sans);
                   width: 84px;
                   resize: none;
                   vertical-align: top;

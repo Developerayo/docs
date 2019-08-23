@@ -128,7 +128,8 @@ class Introduction extends React.PureComponent {
           }
 
           p {
-            font-size: 14px;
+            font-size: var(--font-size-primary);
+            line-height: var(--line-height-primary);
             text-align: center;
             margin: 24px 0;
           }
@@ -941,7 +942,8 @@ export class Editor extends React.PureComponent {
             align-items: center;
             color: #999999;
             display: flex;
-            font-size: 14px;
+            font-size: var(--font-size-primary);
+            line-height: var(--line-height-primary);
             height: 250px;
             justify-content: center;
           }

@@ -140,7 +140,8 @@ class Toast extends React.Component {
               justify-content: space-between;
               padding: 0 20px;
               box-shadow: var(--shadow-small);
-              font-size: 14px;
+              font-size: var(--font-size-primary);
+              line-height: var(--line-height-primary);
               display: flex;
             }
 

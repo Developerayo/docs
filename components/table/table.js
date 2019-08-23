@@ -63,8 +63,8 @@ const Table = ({ children, className, ...other }) => {
           display: flex;
           align-items: center;
           padding: 10px 0;
-          line-height: 1.6;
-          font-size: 12px;
+          line-height: var(--line-height-small);
+          font-size: var(--font-size-small);
         }
 
         table :global(td > div) {
@@ -80,7 +80,8 @@ const Table = ({ children, className, ...other }) => {
 
         table :global(th) {
           color: #666;
-          font-size: 14px;
+          font-size: var(--font-size-small);
+          line-height: var(--line-height-small);
           font-weight: 400;
           letter-spacing: 0;
         }

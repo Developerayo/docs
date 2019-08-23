@@ -3,8 +3,8 @@ const LI = ({ children }) => (
     {children}
     <style jsx>{`
       li {
-        font-size: 14px;
-        line-height: 24px;
+        font-size: var(--font-size-primary);
+        line-height: var(--line-height-primary);
         margin-bottom: 10px;
       }
 

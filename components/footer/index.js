@@ -235,7 +235,8 @@ const Footer = ({ className }) => {
           .navigation span {
             color: var(--accents-3);
             text-decoration: none;
-            font-size: 14px;
+            font-size: var(--font-size-primary);
+            line-height: var(--line-height-primary);
             transition: all 0.2s ease;
           }
           .links {
@@ -248,7 +249,8 @@ const Footer = ({ className }) => {
           }
           .links-title {
             color: var(--geist-foreground);
-            font-size: 14px;
+            font-size: var(--font-size-primary);
+            line-height: var(--line-height-primary);
           }
           .left {
             display: flex;

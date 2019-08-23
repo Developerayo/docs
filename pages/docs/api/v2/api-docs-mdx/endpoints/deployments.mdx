@@ -2,13 +2,13 @@ import Example from '~/components/example'
 import { Code, InlineCode, RequestHeader } from '~/components/text/code'
 import Note from '~/components/text/note'
 import { GenericLink, HelpLink } from '~/components/text/link'
-import { P, PDIV } from '~/components/text/paragraph'
+import { P, Span } from '~/components/text'
 import Endpoint from '~/components/api/endpoint'
 import Request from '~/components/api/request'
 
 export const meta = {
   editUrl: 'pages/docs/api/v2/api-docs-mdx/endpoints/deployments.mdx',
-  lastEdited: '2019-08-02T22:05:57.000Z'
+  lastEdited: '2019-08-15T13:37:26.000Z'
 }
 
 ## Deployments
@@ -23,29 +23,29 @@ Before creating a deployment, [upload any required files](#endpoints/deployments
 
 #### Request Parameters
 
-| Key           | <HelpLink href="#api-basics/types" hasIcon>Type</HelpLink> | Required | Description                                                                                                                                                                                              |
-| ------------- | ---------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **name**      | <HelpLink href="#api-basics/types">String</HelpLink>       | Yes      | A string with the project name used in the deployment URL. The name string has a max length of `52` characters.                                                                                          |
-| **files**     | <HelpLink href="#api-basics/types">List</HelpLink>         | Yes      | A list of objects with the files to be deployed.                                                                                                                                                         |
-| **version**   | <HelpLink href="#api-basics/types">Integer</HelpLink>      | Yes      | The version of Now Platform to use. Must have the value of `2`.                                                                                                                                          |
-| **meta**      | <HelpLink href="#api-basics/types">Map</HelpLink>          | No       | An object containing the deployment's metadata. Multiple key-value pairs can be attached to a deployment. For example, <InlineCode>{ "foo": "bar" }</InlineCode>.                                        |
-| **env**       | <HelpLink href="#api-basics/types">Map</HelpLink>          | No       | An object containing the deployment's environment variable names and values. _Secrets can be referenced by prefixing the value with `@`_.                                                                |
-| **build.env** | <HelpLink href="#api-basics/types">Map</HelpLink>          | No       | An object containing the deployment's environment variable names and values to be passed to Builds. _Secrets can be referenced by prefixing the value with `@`_.                                         |
-| **builds**    | <HelpLink href="#api-basics/types">List</HelpLink>         | No       | A list of Build objects used to build sources in a deployment. For example, <InlineCode noWrap>{`[{ "src": "*.js", "use": "@now/node" }]`}</InlineCode>.                                                 |
-| **routes**    | <HelpLink href="#api-basics/types">List</HelpLink>         | No       | A list of routes objects used to rewrite paths to point towards other internal or external paths. For example; `[{ "src": "/docs", "dest": "https://docs.zeit.co" }]`.                                   |
-| **regions**   | <HelpLink href="#api-basics/types">List</HelpLink>         | No       | An array of the regions the deployment should be deployed to. For example, `["sfo", "bru"]`.                                                                                                             |
-| **public**    | <HelpLink href="#api-basics/types">Boolean</HelpLink>      | No       | Whether a deployment's source and logs are available publicly.                                                                                                                                           |
-| **target**    | <HelpLink href="#api-basics/types">String</HelpLink>       | No       | Either not defined, `staging` or `production`. If `staging`, a staging alias in the format `<project>.<team>.now.sh` will be assigned. If `production`, any aliases defined in `alias` will be assigned. |
-| **alias**     | <HelpLink href="#api-basics/types">List</HelpLink>         | No       | Aliases that will get assigned when the deployment is `READY` and the `target` is `production`. The client needs to make a `GET` request to this API to ensure the assignment.                           |
+| Key           | <HelpLink href="#api-basics/types" hasIcon>Type</HelpLink> | Required | Description                                                                                                                                                                                                                     |
+| ------------- | ---------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **name**      | <HelpLink href="#api-basics/types">String</HelpLink>       | Yes      | A string with the project name used in the deployment URL. The name string has a max length of `52` characters.                                                                                                                 |
+| **files**     | <HelpLink href="#api-basics/types">List</HelpLink>         | Yes      | A list of objects with the files to be deployed.                                                                                                                                                                                |
+| **version**   | <HelpLink href="#api-basics/types">Integer</HelpLink>      | Yes      | The version of Now Platform to use. Must have the value of `2`.                                                                                                                                                                 |
+| **meta**      | <HelpLink href="#api-basics/types">Map</HelpLink>          | No       | An object containing the deployment's metadata. Multiple key-value pairs can be attached to a deployment. For example, <InlineCode>{ "foo": "bar" }</InlineCode>.                                                               |
+| **env**       | <HelpLink href="#api-basics/types">Map</HelpLink>          | No       | An object containing the deployment's environment variable names and values. _Secrets can be referenced by prefixing the value with `@`_.                                                                                       |
+| **build.env** | <HelpLink href="#api-basics/types">Map</HelpLink>          | No       | An object containing the deployment's environment variable names and values to be passed to Builds. _Secrets can be referenced by prefixing the value with `@`_.                                                                |
+| **builds**    | <HelpLink href="#api-basics/types">List</HelpLink>         | No       | A list of Build objects used to build sources in a deployment. For example, <InlineCode noWrap>{`[{ "src": "*.js", "use": "@now/node" }]`}</InlineCode>.                                                                        |
+| **routes**    | <HelpLink href="#api-basics/types">List</HelpLink>         | No       | A list of routes objects used to rewrite paths to point towards other internal or external paths. For example; `[{ "src": "/docs", "dest": "https://docs.zeit.co" }]`.                                                          |
+| **regions**   | <HelpLink href="#api-basics/types">List</HelpLink>         | No       | An array of the regions the deployment should be deployed to. For example, `["sfo", "bru"]`.                                                                                                                                    |
+| **public**    | <HelpLink href="#api-basics/types">Boolean</HelpLink>      | No       | Whether a deployment's source and logs are available publicly.                                                                                                                                                                  |
+| **target**    | <HelpLink href="#api-basics/types">String</HelpLink>       | No       | Either not defined, `staging` or `production`. If `staging`, a staging alias in the format `<project>.<team>.now.sh` will be assigned. If `production`, any aliases defined in `alias` will be assigned.                        |
+| **alias**     | <HelpLink href="#api-basics/types">List</HelpLink>         | No       | Aliases that will get assigned when the deployment is `READY` and the `target` is `production`. The client needs to make a `GET` request to [its API](#endpoints/deployments/get-a-single-deployment) to ensure the assignment. |
 
 ##### Aliases
 
-The aliases inside of `alias` are only assigned when the `target` is set to `production` and when the client makes a `GET` request to this API endpoint to verify that the deployment is `READY`. The aliases will only get assigned on this last `GET` request.
+The aliases inside of `alias` are only assigned when the `target` is set to `production` and the deployment reached the `READY` state.
 
 <Note>
   If there are missing certificates for any of the required domains, they will
-  get created in this request. This could make the request take slightly longer
-  to complete.
+  get created during the initialization of the deployment. This could make the deployment
+  take slightly longer to complete.
 </Note>
 
 ##### Files
@@ -131,7 +131,7 @@ In the case you want to first [upload each file](#endpoints/deployments/upload-d
   }}
 />
 
-<span>Example successful (<P.B>200</P.B>) response:</span>
+<span>Example successful (<b>200</b>) response:</span>
 <Code lang="json">{`{
   "id": "dpl_6EZWg2tkQevMN76UQzFgKsD2gaNR",
   "url": "my-instant-deployment-2i7mwl1a1w.now.sh",
@@ -194,7 +194,7 @@ In the case you want to attach metadata to a new deployment, you need to pass th
 
 <Example>
   <span>
-    Example successful (<P.B>200</P.B>) response:
+    Example successful (<b>200</b>) response:
   </span>
   <Code lang="json">{`{
   "id": "dpl_6EZWg2tkQevMN76UQzFgKsD2gaNR",
@@ -229,9 +229,10 @@ In the case you want to attach metadata to a new deployment, you need to pass th
 To create a new deployment, with a new ID and URL, etc. if nothing has changed with the files intended to be deployed that were already previously deployed, use the `forceNew=1` URL parameter.
 
 <Example>
-<P.B>Example First Deployment</P.B>
+<b>Example First Deployment</b>
 
-<PDIV>Request:</PDIV>
+<P>Request:</P>
+
 <Request
   method="POST"
   url="https://api.zeit.co/v9/now/deployments?forceNew=1"
@@ -240,15 +241,20 @@ To create a new deployment, with a new ID and URL, etc. if nothing has changed w
   }}
   auth
   body={{
-    "name": "my-instant-deployment",
-    "version": 2,
-    "files": [
-      { "file": "index.html", "data": "<!doctype html>\n<html>\n  <head>\n    <title>A simple deployment with the Now API!</title>\n  </head>\n  <body>\n    <h1>Welcome to a simple static file</h1>\n    <p>Deployed with <a href=\"https://zeit.co/docs/api\">ZEIT&apos;s Now API</a>!</p>\n    </body>\n</html>" }
+    name: 'my-instant-deployment',
+    version: 2,
+    files: [
+      {
+        file: 'index.html',
+        data:
+          '<!doctype html>\n<html>\n  <head>\n    <title>A simple deployment with the Now API!</title>\n  </head>\n  <body>\n    <h1>Welcome to a simple static file</h1>\n    <p>Deployed with <a href="https://zeit.co/docs/api">ZEIT&apos;s Now API</a>!</p>\n    </body>\n</html>'
+      }
     ]
   }}
 />
 
-<PDIV>Successful Response:</PDIV>
+<P>Successful Response:</P>
+
 <Code lang="json">{`{
   "id": "dpl_D6FpCMUYdba5bZFJvA46FLBMxM2W",
   "url": "my-instant-deployment-3ij3cxz9qr.now.sh",
@@ -273,10 +279,11 @@ To create a new deployment, with a new ID and URL, etc. if nothing has changed w
   }
 }`}</Code>
 
-<P.B>Deploying again with the same request would yield the same response</P.B>, with the same ID and URL due to no differences to the files or configuration.
+<b>Deploying again with the same request would yield the same response</b>, with the same ID and URL due to no differences to the files or configuration.
 
-<P.B>Example Second Deployment using <InlineCode>?forceNew=1</InlineCode></P.B>
+<b>Example Second Deployment using <InlineCode>?forceNew=1</InlineCode></b>
 <P>Request:</P>
+
 <Request
   method="POST"
   url="https://api.zeit.co/v9/now/deployments?forceNew=1"
@@ -285,15 +292,20 @@ To create a new deployment, with a new ID and URL, etc. if nothing has changed w
   }}
   auth
   body={{
-    "name": "my-instant-deployment",
-    "version": 2,
-    "files": [
-      { "file": "index.html", "data": "<!doctype html>\n<html>\n  <head>\n    <title>A simple deployment with the Now API!</title>\n  </head>\n  <body>\n    <h1>Welcome to a simple static file</h1>\n    <p>Deployed with <a href=\"https://zeit.co/docs/api\">ZEIT&apos;s Now API</a>!</p>\n    </body>\n</html>" }
+    name: 'my-instant-deployment',
+    version: 2,
+    files: [
+      {
+        file: 'index.html',
+        data:
+          '<!doctype html>\n<html>\n  <head>\n    <title>A simple deployment with the Now API!</title>\n  </head>\n  <body>\n    <h1>Welcome to a simple static file</h1>\n    <p>Deployed with <a href="https://zeit.co/docs/api">ZEIT&apos;s Now API</a>!</p>\n    </body>\n</html>'
+      }
     ]
   }}
 />
 
-<P.B>Deploying again with the same request using the <InlineCode>?forceNew=1</InlineCode> URL parameter would yield a new, different, response</P.B>, with a different ID and URL:
+<P><b>Deploying again with the same request using the <InlineCode>?forceNew=1</InlineCode> URL parameter would yield a new, different, response</b>, with a different ID and URL:</P>
+
 <Code lang="json">{`{
   "id": "dpl_5bQis7iG8EQxJMAEY92KxsE4WmQZ",
   "url": "my-instant-deployment-613cx07atx.now.sh",
@@ -321,22 +333,24 @@ To create a new deployment, with a new ID and URL, etc. if nothing has changed w
 
 #### Response Parameters
 
-| Key            | <HelpLink href="#api-basics/types" hasIcon>Type</HelpLink> | Description                                                                                                                                                                                               |
-| -------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **id**         | <HelpLink href="#api-basics/types">String</HelpLink>       | A String holding the unique ID of the deployment.                                                                                                                                                         |
-| **url**        | <HelpLink href="#api-basics/types">String</HelpLink>       | A string with the unique URL of the deployment. If it hasn't finished uploading (is incomplete), the value will be `null`.                                                                                |
-| **name**       | <HelpLink href="#api-basics/types">String</HelpLink>       | The name of the deployment.                                                                                                                                                                               |
-| **meta**       | <HelpLink href="#api-basics/types">Map</HelpLink>          | An object containing the deployment's metadata. For example, <InlineCode>{ "foo": "bar" }</InlineCode>.                                                                                                   |
-| **version**    | <HelpLink href="#api-basics/types">Integer</HelpLink>      | The Now platform version the deployment is associated to.                                                                                                                                                 |
-| **regions**    | <HelpLink href="#api-basics/types">List</HelpLink>         | The regions the deployment exists in, e.g. `sfo1`.                                                                                                                                                        |
-| **routes**     | <HelpLink href="#api-basics/types">List</HelpLink>         | A list of routes objects used to rewrite paths to point towards other internal or external paths. For example; `[{ "src": "/docs", "dest": "https://docs.zeit.co" }]`.                                    |
-| **builds**     | <HelpLink href="#api-basics/types">List</HelpLink>         | A list of objects containing the Builds for a particular set of sources in the deployment. Each object contains a `src` and `use` describing the sources files that use Builds in the deployment.         |
-| **plan**       | <HelpLink href="#api-basics/types">String</HelpLink>       | The pricing plan the deployment was made under.                                                                                                                                                           |
-| **public**     | <HelpLink href="#api-basics/types">Boolean</HelpLink>      | A Boolean representing if the deployment is public or not. By default this is `false`.                                                                                                                    |
-| **ownerId**    | <HelpLink href="#api-basics/types">String</HelpLink>       | The unique ID of the user or team the deployment belongs to.                                                                                                                                              |
-| **readyState** | <HelpLink href="#api-basics/types">Enum</HelpLink>         | The state of the deployment depending on the process of deploying, or if it is ready or in an error state. Possible values are `INITIALIZING`, `ANALYZING`, `BUILDING`, `DEPLOYING`, `READY`, or `ERROR`. |
-| **createdAt**  | <HelpLink href="#api-basics/types">Date</HelpLink>         | A number containing the date when the deployment was created in milliseconds.                                                                                                                             |
-| **createdIn**  | <HelpLink href="#api-basics/types">String</HelpLink>       | The region where the deployment was first created, e.g. `sfo1`.                                                                                                                                           |
+| Key               | <HelpLink href="#api-basics/types" hasIcon>Type</HelpLink> | Description                                                                                                                                                                                               |
+| ----------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **id**            | <HelpLink href="#api-basics/types">String</HelpLink>       | A string holding the unique ID of the deployment.                                                                                                                                                         |
+| **url**           | <HelpLink href="#api-basics/types">String</HelpLink>       | A string with the unique URL of the deployment. If it hasn't finished uploading (is incomplete), the value will be `null`.                                                                                |
+| **name**          | <HelpLink href="#api-basics/types">String</HelpLink>       | The name of the deployment.                                                                                                                                                                               |
+| **meta**          | <HelpLink href="#api-basics/types">Map</HelpLink>          | An object containing the deployment's metadata. For example, <InlineCode>{ "foo": "bar" }</InlineCode>.                                                                                                   |
+| **version**       | <HelpLink href="#api-basics/types">Integer</HelpLink>      | The Now platform version the deployment is associated to.                                                                                                                                                 |
+| **regions**       | <HelpLink href="#api-basics/types">List</HelpLink>         | The regions the deployment exists in, e.g. `sfo1`.                                                                                                                                                        |
+| **routes**        | <HelpLink href="#api-basics/types">List</HelpLink>         | A list of routes objects used to rewrite paths to point towards other internal or external paths. For example; `[{ "src": "/docs", "dest": "https://docs.zeit.co" }]`.                                    |
+| **builds**        | <HelpLink href="#api-basics/types">List</HelpLink>         | A list of objects containing the Builds for a particular set of sources in the deployment. Each object contains a `src` and `use` describing the sources files that use Builds in the deployment.         |
+| **plan**          | <HelpLink href="#api-basics/types">String</HelpLink>       | The pricing plan the deployment was made under.                                                                                                                                                           |
+| **public**        | <HelpLink href="#api-basics/types">Boolean</HelpLink>      | A boolean representing if the deployment is public or not. By default this is `false`.                                                                                                                    |
+| **ownerId**       | <HelpLink href="#api-basics/types">String</HelpLink>       | The unique ID of the user or team the deployment belongs to.                                                                                                                                              |
+| **readyState**    | <HelpLink href="#api-basics/types">Enum</HelpLink>         | The state of the deployment depending on the process of deploying, or if it is ready or in an error state. Possible values are `INITIALIZING`, `ANALYZING`, `BUILDING`, `DEPLOYING`, `READY`, or `ERROR`. |
+| **createdAt**     | <HelpLink href="#api-basics/types">Date</HelpLink>         | A number containing the date when the deployment was created in milliseconds.                                                                                                                             |
+| **createdIn**     | <HelpLink href="#api-basics/types">String</HelpLink>       | The region where the deployment was first created, e.g. `sfo1`.                                                                                                                                           |
+| **aliasError**    | <HelpLink href="#api-basics/types">Map</HelpLink>          | An object that will contain a `code` and a `message` when the aliasing fails, otherwise the value will be `null`.                                                                                         |
+| **aliasAssigned** | <HelpLink href="#api-basics/types">Boolean</HelpLink>      | A boolean that will be `true` when the aliases from the `alias` property were assigned successfully.                                                                                                      |
 
 <Example>
 <span>Example request:</span>
@@ -356,7 +370,7 @@ To create a new deployment, with a new ID and URL, etc. if nothing has changed w
   }}
 />
 
-<span>Example successful (<P.B>200</P.B>) response:</span>
+<Span>Example successful (<b>200</b>) response:</Span>
 <Code lang="json">{`{
   "id": "dpl_89qyp1cskzkLrVicDaZoDbjyHuDJ",
   "url": "my-instant-deployment-3ij3cxz9qr.now.sh",
@@ -499,14 +513,15 @@ One way to obtain a deployment ID is to [list all deployments](#endpoints/deploy
 | **alias**      | <HelpLink href="#api-basics/types">List</HelpLink>         | A list of all the aliases (default aliases, staging aliases and production aliases) that were assigned upon deployment creation.                                                                          |
 
 <Example>
-<PDIV>Example Request:</PDIV>
+<P>Example Request:</P>
 <Request
   method="GET"
   url="https://api.zeit.co/v9/now/deployments/dpl_89qyp1cskzkLrVicDaZoDbjyHuDJ"
   auth
 />
 
-<PDIV>Example Response:</PDIV>
+<P>Example Response:</P>
+
 <Code lang="json">{`{
   "id": "dpl_89qyp1cskzkLrVicDaZoDbjyHuDJ",
   "url": "my-instant-deployment-3ij3cxz9qr.now.sh",
@@ -552,7 +567,7 @@ This API allows you to delete a deployment, either by supplying its `:id` in the
 You can obtain the ID, for example, by [listing all deployments](#endpoints/deployments/get-/now/deployments).
 
 <Example>
-  <PDIV>Example request:</PDIV>
+  <P>Example request:</P>
 
 <Request
   method="DELETE"
@@ -560,7 +575,8 @@ You can obtain the ID, for example, by [listing all deployments](#endpoints/depl
   auth
 />
 
-<PDIV>Example response:</PDIV>
+<P>Example response:</P>
+
 <Code lang="json">{`{
   "uid": "dpl_5WJWYSyB7BpgTj3EuwF37WMRBXBtPQ2iTMJHJBJyRfd",
   "state": "DELETED"
@@ -585,7 +601,7 @@ The body will contain entries for each child and directory, coupled with an ID o
 | **children** | <HelpLink href="#api-basics/types">List</HelpLink>         | The children files of the directory (only valid for `directory` type). |
 
 <Example>
-  <PDIV>Example request:</PDIV>
+  <P>Example request:</P>
 
 <Request
   url="https://api.zeit.co/v5/now/deployments/dpl_BRGyoU2Jzzwx7myBnqv3xjRDD2GnHTwUWyFybnrUvjDD/files"
@@ -626,7 +642,7 @@ This API allows you to retrieve the file data of a file associated with a deploy
 The body will contain the raw content of the file.
 
 <Example>
-  <PDIV>Example request:</PDIV>
+  <P>Example request:</P>
 
 <Request
   url="https://api.zeit.co/v9/now/deployments/dpl_BRGyoU2Jzzwx7myBnqv3xjRDD2GnHTwUWyFybnrUvjDD/files/2d4aad419917f15b1146e9e03ddc9bb31747e4d0"
@@ -674,7 +690,7 @@ Each Build is an object with the following keys:
     auth
   />
   <span>
-    Example Successful (<P.B>200</P.B>) response:
+    Example Successful (<P>200</P>) response:
   </span>
   <Code lang="json">{`{
   "builds": [

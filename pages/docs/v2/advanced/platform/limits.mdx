@@ -1,0 +1,44 @@
+import Doc from '~/components/layout/docs'
+import Limits from '~/components/limits'
+
+export const meta = {
+  title: 'Limits',
+  description: 'A list of rate limits that apply on the ZEIT Now platform.',
+  editUrl: 'pages/docs/v2/advanced/platform/limits.mdx',
+  lastEdited: '2019-08-16T15:05:32.000Z'
+}
+
+This page outlines all relevant limits on the ZEIT Now platform.
+
+The table consists of the following four columns:
+
+- **Description** - A brief description of the limit which, where relevant, will advise what type of plan it applies to.
+- **Limit** - The amount of actions permitted within the amount of time (**Duration**) specified.
+- **Duration** - The amount of time (seconds) in which you can perform the specified amount of actions in. Once a rate limit is hit, it will be reset after the **Duration** has expired.
+- **Scope** - Who the limit applies to, `owner` refers to the account owner, `user` refers to an individual user on a **Team** account.
+
+## Examples
+
+Below are three examples that provide further information on how the rate limits work.
+
+### Domain Deletion
+
+Taking the domains deletion rate limit as an example, you are allowed to delete up to `60` domains every `60` seconds (1 minute). Should you hit the rate limit, you will need to wait another minute before deleting another domain.
+
+### Team Deletion
+
+With the team deletion rate limit, you are able to delete up to `20` teams every `3600` seconds (1 hour). Should you hit the rate limit, you will need to wait another hour before deleting another team.
+
+### Username Update
+
+For the username update rate limit, you are able to change your username up to `6` times every `604800` seconds (1 week). Should you hit the rate limit, you will need to wait another week before changing your username again.
+
+---
+
+<Limits />
+
+export default ({ children }) => <Doc meta={meta}>{children}</Doc>
+
+export const config = {
+  amp: 'hybrid'
+}

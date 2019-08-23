@@ -3,21 +3,21 @@ import Doc from '~/components/layout/docs'
 export const meta = {
   title: 'Deployment Concepts',
   description:
-    'A list of concepts for how Now deployments work for your projects.',
+    'A list of concepts for how ZEIT Now deployments work for your projects.',
   editUrl: 'pages/docs/v2/advanced/concepts/overview.mdx',
-  lastEdited: '2019-08-06T15:31:27.000Z'
+  lastEdited: '2019-08-22T10:47:21.000Z'
 }
 
-For an in-depth look at how deployments on Now work, see the following core concepts and what they do.
+For an in-depth look at how deployments on ZEIT Now work, see the following core concepts and what they do.
 
-| Concept                                                                                  | Description                                                                                                                                                                                           |
-| ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Lifecycle](/docs/v2/deployments/concepts/lifecycle)                                     | The lifecycle of a deployment determines its readiness to accept user requests and serve traffic. Read more about how deployments go through phases to ensure they are served with maximum potential. |
-| [Immutability](/docs/v2/deployments/concepts/immutability)                               | Now deployments are immutable. Read more about this concept to see how it helps scale projects.                                                                                                       |
-| [URLs](/docs/v2/deployments/concepts/urls)                                               | Now Deployments are always assigned their own unique URLs and staging aliases. Read more about how they are formatted and how they work.                                                              |
-| [Special Paths](/docs/v2/deployments/concepts/special-paths)                             | Now Deployments always have two special pathnames; `/_src` and `/_logs`. Read more about what they are and how they help with your deployments workflow.                                              |
-| [Lambdas](/docs/v2/deployments/concepts/lambdas)                                         | Now outputs dynamic files as serverless Lambdas. Read more about how Lambdas work for your deployments and the benefits of serverless.                                                                |
-| [CDN and Global Distribution](/docs/v2/deployments/concepts/cdn-and-global-distribution) | Now comes with a fully-featured and automatic CDN for deployments. Read more about how it works.                                                                                                      |
+| Concept                                                                               | Description                                                                                                                                                                                           |
+| ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Lifecycle](/docs/v2/advanced/concepts/lifecycle)                                     | The lifecycle of a deployment determines its readiness to accept user requests and serve traffic. Read more about how deployments go through phases to ensure they are served with maximum potential. |
+| [Immutability](/docs/v2/advanced/concepts/immutability)                               | Now deployments are immutable. Read more about this concept to see how it helps scale projects.                                                                                                       |
+| [URLs](/docs/v2/advanced/concepts/urls)                                               | Now Deployments are always assigned their own unique URLs and staging aliases. Read more about how they are formatted and how they work.                                                              |
+| [Special Paths](/docs/v2/advanced/concepts/special-paths)                             | Now Deployments always have two special pathnames; `/_src` and `/_logs`. Read more about what they are and how they help with your deployments workflow.                                              |
+| [Lambdas](/docs/v2/advanced/concepts/lambdas)                                         | Now outputs dynamic files as serverless Lambdas. Read more about how Lambdas work for your deployments and the benefits of serverless.                                                                |
+| [CDN and Global Distribution](/docs/v2/advanced/concepts/cdn-and-global-distribution) | Now comes with a fully-featured and automatic CDN for deployments. Read more about how it works.                                                                                                      |
 
 export default ({ children }) => <Doc meta={meta}>{children}</Doc>
 

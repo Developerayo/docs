@@ -5,9 +5,6 @@ import PropTypes from 'prop-types'
 // Components
 import Button from '~/components/buttons'
 
-// Config
-import { COLOR_ERROR, FONT_FAMILY_SANS } from '~/lib/css-config'
-
 class FeedbackInput extends Component {
   clearSuccessTimer = null
   textAreaRef = null
@@ -162,9 +159,9 @@ class FeedbackInput extends Component {
             border-width: 0;
             border-radius: 5px;
             padding: 4px 8px;
-            font-size: 14px;
-            line-height: 1.6;
-            font-family: ${FONT_FAMILY_SANS};
+            font-size: var(--font-size-primary);
+            line-height: var(--line-height-primary);
+            font-family: var(--font-sans);
             resize: none;
             position: absolute;
             vertical-align: top;
@@ -242,7 +239,7 @@ class FeedbackInput extends Component {
           }
 
           .error-message span {
-            color: ${COLOR_ERROR};
+            color: var(--geist-error);
             margin-bottom: 20px;
           }
 

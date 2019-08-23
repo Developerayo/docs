@@ -1,34 +1,51 @@
 import Doc from '~/components/layout/docs'
+import Caption from '~/components/text/caption'
+import { InlineCode } from '~/components/text/code'
+import { GenericLink } from '~/components/text/link'
 
 export const meta = {
   title: 'Compression',
   description:
     'How ZEIT Now serves content with compression and which methods are used.',
   editUrl: 'pages/docs/v2/network/compression.mdx',
-  lastEdited: '2019-08-06T15:31:27.000Z'
+  lastEdited: '2019-08-12T19:45:54.000Z'
 }
 
-Because the Network layer already implements two compression methods ([Gzip](https://en.wikipedia.org/wiki/LZ77_and_LZ78#LZ77) and [Brotli](https://en.wikipedia.org/wiki/Brotli)), we highly recommend leveraging them instead of making the code you are deploying to Now handle the compression.
+The ZEIT Network layer implements two compression methods; [Gzip](https://en.wikipedia.org/wiki/LZ77_and_LZ78#LZ77) and [Brotli](https://en.wikipedia.org/wiki/Brotli). We highly recommend leveraging ZEIT Network compression over a self hosted solution.
 
-This way, you are getting the maximum out of performance and do not have to worry about maintaining the code responsible for compressing your responses.
+Using the provided compression methods will result in the best performance and least maintenance.
 
-Any program that is requesting resources of any of your deployments needs to define the [Accept-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding) header in order for the compression mechanisms to kick in. Many clients (like browsers) already do this out of the box, but in the case that you are requesting resources using a different client, make sure to define the header.
+Any client that makes requests to your deployment needs to define the [Accept-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding) header to opt into compression. Many clients (browsers like Chrome, Firefox and Safari) already do this out of the box. If you're making a request from another type of client make sure you use the `Accept-Encoding` header to take advantage of compression.
 
-As an example, this is how you ask the Network layer to compress using [Brotli](https://en.wikipedia.org/wiki/Brotli):
+As an example, this is how you ask the Network layer to compress using [Brotli](https://en.wikipedia.org/wiki/Brotli):
 
 ```
 Accept-Encoding: br
 ```
 
-If your client supports [Brotli](https://en.wikipedia.org/wiki/Brotli), we generally recommend using it over [Gzip](https://en.wikipedia.org/wiki/LZ77_and_LZ78#LZ77), because it usually performs much better.
+<Caption>
+  An example <InlineCode>Accept-Encoding</InlineCode> header requesting{' '}
+  <GenericLink href="https://en.wikipedia.org/wiki/Brotli">Brotli</GenericLink>{' '}
+  compression.
+</Caption>
 
-Nevertheless, some clients might not support it, so you have to stick to [Gzip](https://en.wikipedia.org/wiki/LZ77_and_LZ78#LZ77):
+If your client supports [Brotli](https://en.wikipedia.org/wiki/Brotli), we generally recommend using it over [Gzip](https://en.wikipedia.org/wiki/LZ77_and_LZ78#LZ77), because it [usually performs much better](https://medium.com/oyotech/how-brotli-compression-gave-us-37-latency-improvement-14d41e50fee4).
+
+Nevertheless, some clients might not support it, so to use [Gzip](https://en.wikipedia.org/wiki/LZ77_and_LZ78#LZ77):
 
 ```
 Accept-Encoding: gzip
 ```
 
-Assuming that the program requesting resources from any of your deployments defines the header like mentioned above, it is served compressed responses automatically.
+<Caption>
+  An example <InlineCode>Accept-Encoding</InlineCode> header requesting{' '}
+  <GenericLink href="https://en.wikipedia.org/wiki/LZ77_and_LZ78#LZ77">
+    Gzip
+  </GenericLink>{' '}
+  compression.
+</Caption>
+
+Assuming that the program requests deployment resources with the appropriate `Accept-Encoding` header, the response will be compressed automatically.
 
 export default ({ children }) => <Doc meta={meta}>{children}</Doc>
 

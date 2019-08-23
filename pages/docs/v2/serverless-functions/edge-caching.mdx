@@ -6,9 +6,9 @@ import Note from '~/components/text/note'
 export const meta = {
   title: 'Edge Cache for Serverless Functions',
   description:
-    'Learn how to serverless function responses are cached with ZEIT Now and how you can define the cache behaviour.',
+    'Learn how to serverless function responses are cached with ZEIT Now and how you can define the cache behavior.',
   editUrl: 'pages/docs/v2/serverless-functions/edge-caching.mdx',
-  lastEdited: '2019-08-06T15:31:27.000Z'
+  lastEdited: '2019-08-21T15:24:05.000Z'
 }
 
 The ZEIT Smart CDN is active for all deployments and domains on your account and caches your content at [the edge](/docs/v2/advanced/platform/regions-and-providers/) to serve data to your users as fast as possible.
@@ -65,11 +65,11 @@ This recommendation will tell browsers not to cache and let our edge cache the r
 
 The Smart CDN supports a powerful recent extension to the `Cache-Control` header called `stale-while-revalidate`.
 
-The benefit of using `stale-while-revalidate` is that we can serve a resource from our CDN cache, but at the same time, update it **in the background** by invoking your [serverless function](/docs/v2/serverless-functions/introduction).
+The benefit of using `stale-while-revalidate` is that we can serve a resource from our CDN cache while simultaneously updating the cache **in the background** with the response from your lambda.
 
 Some situations where `stale-while-revalidate` is of great value:
 
-- Your content changes frequently but it takes a significant amount of time to regenerate. Maybe because of database or API access.
+- Your content changes frequently but it takes a significant amount of time to regenerate. For example, an expensive database query or upstream API request.
 - Your content changes infrequently but you want to have the flexibility to update it (to fix a typo, for example) and don't wait for cache to expire.
 
 In both cases, we recommend using:

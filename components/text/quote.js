@@ -6,14 +6,9 @@ const Quote = ({ children }, { darkBg } = {}) => (
     <style jsx>{`
       blockquote {
         padding: 10px 20px;
-        border-left: 5px solid #000;
+        border-left: 5px solid var(--geist-foreground);
         margin: 32px 0;
-        color: #000;
-      }
-
-      blockquote.dark {
-        border-left-color: #fff;
-        color: #888;
+        color: var(--accents-4);
       }
 
       blockquote :global(div) {

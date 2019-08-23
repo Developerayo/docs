@@ -5,13 +5,12 @@ import { Image } from '~/components/media'
 import Caption from '~/components/text/caption'
 import Note from '~/components/text/note'
 import { GenericLink } from '~/components/text/link'
-import Card from '~/components/card'
 
 export const meta = {
   title:
-    'Create a Next.js Application With a MySQL Database That Builds and Deploys with Now',
+    'Create a Next.js App with a MySQL Database That Builds and Deploys with ZEIT Now',
   description:
-    'How to deploy your Next.js and MySQL application with Now in a serverless environment',
+    'How to deploy your Next.js and MySQL app with ZEIT Now in a serverless environment.',
   published: '2019-04-26T16:51:04.000Z',
   authors: ['msweeneydev', 'furf'],
   url: '/guides/deploying-next-and-mysql-with-now',
@@ -19,12 +18,12 @@ export const meta = {
     process.env.ASSETS
   }/guides/deploying-next-mysql-with-now/deploying-next-mysql-with-now.png`,
   editUrl: 'pages/guides/deploying-next-and-mysql-with-now.mdx',
-  lastEdited: '2019-08-06T14:58:43.000Z'
+  lastEdited: '2019-08-22T09:01:17.000Z'
 }
 
 In this guide, we will walk you through creating and [deploying](/docs/v2/deployments/basics/) a [Next.js](https://nextjs.org/) app with the most popular open source database in the world, [MySQL](https://www.mysql.com/), on [ZEIT Now](/docs/v2).
 
-[Next.js](https://nextjs.org/) from [ZEIT](https://zeit.co) is a production-ready framework that can help you create fast React applications. By using it along with MySQL, you can create a fast, modern web app that interacts with customer data in a performant manner.
+[Next.js](https://nextjs.org/) from [ZEIT](https://zeit.co) is a production-ready framework that can help you create fast React apps. By using it along with MySQL, you can create a fast, modern web app that interacts with customer data in a performant manner.
 
 We demonstrate the set up via an [example app](https://next-mysql.now.sh), that displays a paginated, gallery view of robot profiles, with individual profiles just a click away. The finished app can be found at <https://next-mysql.now.sh>.
 
@@ -50,7 +49,15 @@ Once you have your remote MySQL database setup, you should make a note of your d
 - Database username
 - Database password
 
-Using these credentials, you can connect to your database and insert the [example data](https://github.com/zeit/now-examples/blob/master/nextjs-mysql/db.sql) into a new table named `profiles`.
+Using these credentials, you can connect to your database and insert your data into a new table, named `profiles`.
+
+For this example, a `profile` consists of the following fields:
+
+- **address** `string`
+- **avatar** `string`
+- **email** `string`
+- **id** `number`
+- **name** `string`
 
 For brevity, we do not cover inserting records into a MySQL database. More information on doing this can be found in the [MySQL documentation](https://dev.mysql.com/doc/mysql-getting-started/en/#mysql-getting-started-connecting).
 
@@ -63,23 +70,28 @@ Now that the database is populated, you can create a project directory and `cd` 
   Creating and entering into the <InlineCode>/next-mysql</InlineCode>{' '}directory.
 </Caption>
 
-Next, [initialize](https://yarnpkg.com/lang/en/docs/cli/init/) the project:
+Next, [initialize](https://docs.npmjs.com/cli/init) the project:
 
-<Snippet dark text="yarn init" />
+<Snippet dark text="npm init" />
 <Caption>
   Initializing the project, this creates a <InlineCode>package.json</InlineCode>{' '}file.
 </Caption>
 
-Yarn will present some initial questions to set up your project, complete this and when done, add [`serverless-mysql`](https://github.com/jeremydaly/serverless-mysql) and [`sql-template-strings`](https://github.com/felixfbecker/node-sql-template-strings) as [dependencies](https://yarnpkg.com/en/docs/cli/add#toc-yarn-add):
+<Note>
+  During the initializing process, npm will ask questions about your project.
+  Answer these how you wish; there are no prerequisites for this example.
+</Note>
 
-<Snippet dark text="yarn add serverless-mysql sql-template-strings" />
+When this is complete, add [`serverless-mysql`](https://github.com/jeremydaly/serverless-mysql) and [`sql-template-strings`](https://github.com/felixfbecker/node-sql-template-strings) as [dependencies](https://docs.npmjs.com/specifying-dependencies-and-devdependencies-in-a-package-json-file):
+
+<Snippet dark text="npm i serverless-mysql sql-template-strings" />
 <Caption>
-  Adding <InlineCode>serverless-mysql</InlineCode> and <InlineCode>sql-template-strings</InlineCode> as <GenericLink href="https://yarnpkg.com/lang/en/docs/installing-dependencies/">dependencies</GenericLink> to the project.
+  Adding <InlineCode>serverless-mysql</InlineCode> and <InlineCode>sql-template-strings</InlineCode> as <GenericLink href="https://docs.npmjs.com/specifying-dependencies-and-devdependencies-in-a-package-json-file">dependencies</GenericLink> to the project.
 </Caption>
 
 Adding [`serverless-mysql`](https://github.com/jeremydaly/serverless-mysql) to the project will allow you to make connections to your MySQL database. In addition to this, it also **manages connections**, ensuring you do not 'max out' the available connections.
 
-Managing MySQL connections is an essential part of using it **successfully in a serverless environment**. This is because [serverless functions](/docs/v2/deployments/concepts/lambdas/) will create multiple database connections as traffic increases. Therefore, all connections can be consumed quickly unless managed correctly - this is **all handled for you** by [`serverless-mysql`](https://github.com/jeremydaly/serverless-mysql).
+Managing MySQL connections is an essential part of using it **successfully in a serverless environment**. This is because [serverless functions](/docs/v2/advanced/concepts/lambdas/) will create multiple database connections as traffic increases. Therefore, all connections can be consumed quickly unless managed correctly - this is **all handled for you** by [`serverless-mysql`](https://github.com/jeremydaly/serverless-mysql).
 
 <Note>
   Using <InlineCode>sql-template-strings</InlineCode> is strongly recommended to
@@ -166,7 +178,7 @@ Your `db.js` file performs the following functions:
   prevents your app from exhausting all available connections.
 </Note>
 
-Now you have a reusable database connection, perfectly suited for a [serverless](/docs/v2/deployments/concepts/lambdas/) environment.
+Now you have a reusable database connection, perfectly suited for a [serverless](/docs/v2/advanced/concepts/lambdas/) environment.
 
 ## Step 4: Creating Your Node.js API
 
@@ -227,7 +239,7 @@ Your `index.js` file performs the following functions:
   </GenericLink>.
 </Note>
 
-That is all the API code required to successfully use pagination in a [serverless](/docs/v2/deployments/concepts/lambdas/) environment.
+That is all the API code required to successfully use pagination in a [serverless](/docs/v2/advanced/concepts/lambdas/) environment.
 
 Next, create a `profile.js` file in your `/profiles` directory containing the code below:
 
@@ -255,13 +267,13 @@ Your `profile.js` file performs the following functions:
 - Uses the query parameter to select a single profile from the database
 - Sends the retrieved profile as a response
 
-You now have an API that will give you either all profiles or just a single one, dependent on the [route](/docs/v2/deployments/routes/). You now need to create the application interface to display them.
+You now have an API that will give you either all profiles or just a single one, dependent on the [route](/docs/v2/deployments/routes/). You now need to create the app interface to display them.
 
 ## Step 5: Creating Your Next.js Client
 
-To add [Next.js]() to your project, you should install the following [dependencies](https://yarnpkg.com/lang/en/docs/installing-dependencies/):
+To add [Next.js](https://nextjs.org/) to your project, you should install the following [dependencies](https://docs.npmjs.com/specifying-dependencies-and-devdependencies-in-a-package-json-file):
 
-<Snippet dark text="yarn add isomorphic-unfetch next react react-dom" />
+<Snippet dark text="npm i isomorphic-unfetch next react react-dom" />
 <Caption>
   Adding multiple dependencies to the project.
 </Caption>
@@ -384,13 +396,13 @@ Your `pages/index.js` file performs the following functions:
 - Receives the profile data, making it available as a prop
 - Displays the profile with an option to go back to the gallery
 
-You now have a **complete application** with both an API and interface, the next section will show you how to deploy it seamlessly with [Now](/docs/v2/getting-started/introduction-to-now).
+You now have a **complete app** with both an API and interface, the next section will show you how to deploy it seamlessly with [Now](/docs/v2/getting-started/introduction-to-now).
 
 ## Step 6: Deploy Your Project with Now
 
 Getting your project ready to [deploy](/docs/v2/deployments/basics/) with [Now](/docs/v2/getting-started/introduction-to-now) could hardly be simpler, all that's required is the inclusion of [environment variables](/docs/v2/deployments/environment-variables-and-secrets).
 
-Create a [`now.json` file](/docs/v2/deployments/configuration) with the following configuration to make the environment variables available to your serverless functions:
+Create a [`now.json` file](/docs/v2/advanced/configuration) with the following configuration to make the environment variables available to your serverless functions:
 
 ```json
 {
@@ -407,7 +419,7 @@ Create a [`now.json` file](/docs/v2/deployments/configuration) with the followin
   An example <InlineCode>now.json</InlineCode> file for your project.
 </Caption>
 
-Finally, deploy the application with [Now](/docs/v2/getting-started/introduction-to-now).
+Finally, deploy the app with [ZEIT Now](/docs/v2/getting-started/introduction-to-now).
 
 If you have not yet installed Now, you can do so by [installing Now CLI](/download).
 
@@ -416,35 +428,10 @@ If you have not yet installed Now, you can do so by [installing Now CLI](/downlo
 <Snippet dark text="now" />
 
 <Caption>
-  Deploying the application with the <InlineCode>now</InlineCode> command.
+  Deploying the app with the <InlineCode>now</InlineCode> command.
 </Caption>
 
 You will see a short build step in your terminal followed by the news that your project has been [deployed](https://zeit.co/docs/v2/deployments/basics/), it should look similar to this: <https://next-mysql.now.sh/>
-
-## Resources
-
-For more information on working with [MySQL](https://www.mysql.com/) and [Next.js](https://nextjs.org/), please refer to their documentation.
-
-To configure [Now](/docs/v2/getting-started/introduction-to-now) further, please see these additional topics and guides:
-
-<Card title="Deploying Basics" href="/docs/v2/deployments/basics">
-  Deploy any of your applications with ZEIT Now.
-</Card>
-
-<Card
-  title="Aliasing"
-  href="/docs/v2/custom-domains#deploying-with-your-domain"
->
-  Learn more about aliasing to your deployments.
-</Card>
-
-<Card title="www. Redirect" href="/guides/redirect-from-www">
-  Create a redirect from the www. subdomain to your naked domain.
-</Card>
-
-<Card title="More Guides" href="/guides">
-  See more guides that help you move forward with your projects and deployments.
-</Card>
 
 export default ({ children }) => <Guide meta={meta}>{children}</Guide>
 

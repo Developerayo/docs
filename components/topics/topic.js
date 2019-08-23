@@ -1,4 +1,4 @@
-import H5 from '~/components/text/h5'
+import { H5 } from '~/components/text'
 import { LinkWithHoverPrefetch as Link } from '~/components/text/link'
 
 export default function Topic({ topic, icons, href }) {
@@ -87,7 +87,8 @@ export default function Topic({ topic, icons, href }) {
 
         .note {
           color: var(--accents-5);
-          font-size: 14px;
+          font-size: var(--font-size-primary);
+          line-height: var(--line-height-primary);
         }
       `}</style>
     </div>
