@@ -8,21 +8,25 @@ import { Image } from '~/components/media'
 export const meta = {
   title: 'Deploying Realtime Serverless Apps with Pusher and ZEIT Now',
   description:
-    'How to get started building and deploying realtime serverless apps with Pusher on ZEIT Now',
+    'How to get started building and deploying realtime serverless apps with Pusher on ZEIT Now.',
   published: '2019-08-20T19:22:52.039Z',
   authors: ['coetry'],
   url: '/guides/deploying-pusher-with-zeit-now',
   image:
-    'https://og-image.now.sh/**Realtime%20Serverless%20Apps**%20with%20Pusher.png?theme=light&md=1&fontSize=100px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fzeit-black-triangle.svg&images=https%3A%2F%2Fpusher-icon.now-examples.now.sh',
+    'https://og-image.now.sh/**Deploy%20Serverless%20Pusher%20Apps**%20with%20ZEIT%20Now.png?theme=light&md=1&fontSize=85px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fzeit-black-triangle.svg&images=https%3A%2F%2Fpusher-icon.now-examples.now.sh',
   editUrl: 'pages/guides/deploying-pusher-with-zeit-now.mdx',
-  lastEdited: '2019-08-23T12:04:50.000Z'
+  lastEdited: '2019-08-25T20:54:16.000Z'
 }
 
-WebSockets have enabled realtime online experiences like collaborative document editing, multiplayer games, and interactive chatrooms. Solutions such as [socket.io](https://socket.io) have made writing WebSocket servers a breeze, but what if our backend is a serverless lambda function with limited execution times?
+[Pusher](https://pusher.com/) is a service that makes it easy to add real-time data and functionality to web and mobile applications.
 
-By design, serverless functions have maximum execution limits and should aim to respond to the client as quick as possible. An open WebSocket connection would require processes to live until the connection is closed, which can be well over the maximum execution time. Solutions like [Pusher Channels](https://pusher.com/channels) solve complex realtime infrastructure problems so you don’t have to. All you need is a single serverless function to _publish_ or _push_ some data, and a client to _subscribe_ to channels and data events.
+This guide demonstrates how to get started creating and deploying real-time serverless applications with framework agnostic HTML, CSS, JavaScript, Pusher, and ZEIT Now.
 
-This guide demonstrates how to get started creating and deploying real-time serverless applications with framework agnostic HTML, CSS, JavaScript, Pusher, and Now. <Note>This guide will not be a full code walkthrough, but rather an overview of the key pieces. Please refer to the full source code linked at the bottom of the guide to see how everything fits together.</Note>
+<Note>
+  This guide will not be a full code walkthrough, but rather an overview of the
+  key pieces. Please refer to the full source code linked at the bottom of the
+  guide to see how everything fits together.
+</Note>
 
 ## Step 1: Pusher Account Setup
 
