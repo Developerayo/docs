@@ -15,12 +15,12 @@ export const meta = {
   image:
     'https://og-image.now.sh/**Deploy%20Serverless%20Pusher%20Apps**%20with%20ZEIT%20Now.png?theme=light&md=1&fontSize=85px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fzeit-black-triangle.svg&images=https%3A%2F%2Fpusher-icon.now-examples.now.sh',
   editUrl: 'pages/guides/deploying-pusher-with-zeit-now.mdx',
-  lastEdited: '2019-08-25T20:54:16.000Z'
+  lastEdited: '2019-08-25T21:35:37.000Z'
 }
 
 [Pusher](https://pusher.com/) is a service that makes it easy to add real-time data and functionality to web and mobile applications.
 
-This guide demonstrates how to get started creating and deploying real-time serverless applications with framework agnostic HTML, CSS, JavaScript, Pusher, and ZEIT Now.
+This guide demonstrates how to get started creating and deploying real-time serverless applications with Pusher, and ZEIT Now.
 
 <Note>
   This guide will not be a full code walkthrough, but rather an overview of the
@@ -38,6 +38,7 @@ Let's start by making an account on [Pusher](https://dashboard.pusher.com/accoun
   height={380}
   oversize
 />
+<Caption>Creating a new app from the Pusher dashboard.</Caption>
 
 Next, we'll give our app a name and select a region. Choose a region closest to the majority of your customers to minimize latency.
 
@@ -47,6 +48,7 @@ Next, we'll give our app a name and select a region. Choose a region closest to 
   height={380}
   oversize
 />
+<Caption>Adding a <InlineCode>name</InlineCode> and <InlineCode>region</InlineCode> to the app from the Pusher dashboard.</Caption>
 
 From your dashboard, you can scroll down to find all of your pusher apps. Locate the one you just created and click on it.
 
@@ -56,8 +58,9 @@ From your dashboard, you can scroll down to find all of your pusher apps. Locate
   height={380}
   oversize
 />
+<Caption>Selecting the app from the Pusher dashboard.</Caption>
 
-Finally, click on the tab that reveals your App Keys. We need to copy these values so that we can save them as secrets and then pass them as environmental variables.
+Finally, click on the tab that reveals your App Keys. We need to copy these values so that we can save them as secrets and then pass them as environment variables.
 
 <Image
   src={`/static/guides/deploying-pusher-with-now/pusher-app-keys.png`}
@@ -65,14 +68,15 @@ Finally, click on the tab that reveals your App Keys. We need to copy these valu
   height={380}
   oversize
 />
+<Caption>Viewing the <InlineCode>App Keys</InlineCode> from the Pusher dashboard.</Caption>
 
 ## Step 2: Set Up Your Project
 
-Now that we have our Pusher account and app set up, let's create our directory structure. All we need is a root directory where our static files (HTML, CSS, JS) will live and an `api` directory with our lambda functions. Create a new directory named <InlineCode>realtime-lambda</InlineCode> and in it, create a directory named <InlineCode>api</InlineCode>. Then enter your newly created directory.
+Now that we have our Pusher account and app set up, let's create our directory structure. All we need is a root directory where our static files will live, and an `/api` directory with our lambda functions.
 
 <Snippet dark text="mkdir -p realtime-lambda/api && cd realtime-lambda" />
 
-With our directory set up, create an <InlineCode>index.html</InlineCode> file and add the script tags below inside the <InlineCode>body</InlineCode>.
+With our directory set up, create an `index.html` file with the following code:
 
 ```html
 <!DOCTYPE html>
@@ -89,20 +93,12 @@ With our directory set up, create an <InlineCode>index.html</InlineCode> file an
 
 <Caption>
   Adding <InlineCode>script</InlineCode> tags inside the{' '}
-  <InlineCode>body</InlineCode>of our<InlineCode>index.html</InlineCode>
+  <InlineCode>body</InlineCode>of our <InlineCode>index.html</InlineCode> file.
 </Caption>
 
 We want to create an instance of a Pusher client that subscribes and reacts to events on the appropriate channel. We also want to send data to our lambda that will trigger a push event.
 
-Create a <InlineCode>main.js</InlineCode> file where we'll initialize a Pusher object with our app key and an object containing our cluster info.
-
-<Note>
-  Our app key will be exposed on the client, but that's fine since we need to
-  combine it with a secret in order to push anything. We'll do that later in our
-  lambda function by passing it through an environmental variable.
-</Note>
-
-With our object, we'll subscribe to the appropriate channel and bind a callback function to react to our events within that channel. We can subscribe to as many channels and bind callbacks to as many events as we need.
+Create a `main.js` file where we'll initialize a Pusher object with our app key, subscribe to the appropriate channel and bind a callback function to react to our events within that channel.
 
 ```js
 // initialize Pusher client
@@ -120,20 +116,11 @@ channel.bind('event-name', function(data) {
 ```
 
 <Caption>
-  Initializing a <InlineCode>Pusher</InlineCode> client, creating a channel, and
-  binding to an event
+  Initializing a <InlineCode>Pusher</InlineCode> client, subscribing to a
+  channel, and binding to an event.
 </Caption>
 
-All that's remaining on the client is to create a way to send data to our backend to trigger push events. We just need to send a <InlineCode>POST</InlineCode> request to our lambda and can do so with the native [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). By wrapping our request in a function, we can re-use it whenever we need to send data. Add the snippet below to your <InlineCode>main.js</InlineCode> file.
-
-<Note>
-  We haven't created our lambda function yet, but its good to mention that
-  routing follows the filesystem convention by default. All that's needed to
-  create a valid route for the path we are requesting, is to create a file named{' '}
-  <InlineCode>pusher-lambda.js</InlineCode> in our <InlineCode>api</InlineCode>{' '}
-  directory and it'll be invoked when we send a request to{' '}
-  <InlineCode>/api/pusher-lambda</InlineCode>.
-</Note>
+All that's remaining on the client is to create a way to send data to our backend to trigger push events. Add the snippet below to your <InlineCode>main.js</InlineCode> file to achieve this.
 
 ```js
 async function pushData(data) {
@@ -152,20 +139,28 @@ async function pushData(data) {
 
 <Caption>
   A function in <InlineCode>main.js</InlineCode> to send event data to our{' '}
-  <InlineCode>api</InlineCode>endpoint
+  <InlineCode>/api</InlineCode> endpoint.
 </Caption>
 
-Before we move over to our lambda, we need to first add the appropriate [secrets](https://zeit.co/docs/v2/build-step#using-environment-variables-and-secrets) to our account and expose them as environmental variables. We can do so with the [Now CLI](https://zeit.co/download). Since the app key and cluster are already exposed on the client and they are not sensitive, we don't need to add them as secrets. We'll only add our _app id_ and our _app secret_.
+Using [Now CLI](/download), add the following [Now Secrets](https://zeit.co/docs/v2/build-step#using-environment-variables-and-secrets) to your account and expose them as environment variables.
 
-<Snippet dark text={`now secrets add pusher-app-id "***"`} />
-<Snippet dark text={`now secrets add pusher-app-secret "***"`} />
+<Snippet dark text={`now secrets add pusher-app-id my-pusher-app-id`} />
+<Caption>
+  Adding the <InlineCode>pusher-app-id</InlineCode> as a Now Secret.
+</Caption>
 
-Next, create a minimal <InlineCode>now.json</InlineCode> file with environment variables to expose the secrets you added to your account.
+<Snippet dark text={`now secrets add pusher-app-secret my-pusher-app-secret`} />
+<Caption>
+  Adding the <InlineCode>pusher-app-secret</InlineCode> as a Now Secret.
+</Caption>
 
-<Note>
-  We can pass unencrypted environment variables as plain text and encrypted
-  values stored in our account with the <InlineCode>@</InlineCode> prefix.
+<Note hint>
+  {' '}
+  Since the app key and cluster are already exposed on the client and they are not
+  sensitive, we <b>do not need</b> to add them as secrets.
 </Note>
+
+Next, create a minimal <InlineCode>now.json</InlineCode> file with environment variables to expose the secrets you added to your account, replacing `app-key` and `cluster-region` with the plaintext provided by Pusher.
 
 ```json
 {
@@ -179,12 +174,17 @@ Next, create a minimal <InlineCode>now.json</InlineCode> file with environment v
 }
 ```
 
-Add the dependencies for the serverless function from inside the <InlineCode>/api</InlineCode> directory.
+<Caption>
+  An example <InlineCode>now.json</InlineCode> file that provides the app with
+  environment variables.
+</Caption>
+
+Add the dependencies for the Serverless Function from inside the <InlineCode>/api</InlineCode> directory.
 
 <Snippet dark text="cd api && npm i pusher" />
-<Caption>Entering the `/api` directory and installing the `pusher` npm package</Caption>
+<Caption>Entering the <InlineCode>/api</InlineCode> directory and installing the <InlineCode>pusher</InlineCode> npm package</Caption>
 
-Create a <InlineCode>pusher-lambda.js</InlineCode> inside the <InlineCode>/api</InlineCode> directory that initializes a new Pusher object with the environmental variables and receives data from the [`req.body` helper method](https://zeit.co/docs/v2/serverless-functions/supported-languages/#node.js-request-and-response-objects), before invoking [`pusher.trigger`](https://github.com/pusher/pusher-http-node#publishing-events) to register the event. Then we pull the data that we sent to our lambda via the [req.body](https://zeit.co/docs/v2/serverless-functions/supported-languages/#node.js-request-and-response-objects) helper method and invoke [pusher.trigger](https://github.com/pusher/pusher-http-node#publishing-events) with it in addition to the channel name and the event name. We need to send a status code and a response for the lambda or else our application would return an error, so we can just chain [req.status](https://github.com/pusher/pusher-http-node#publishing-events) and [req.end](https://github.com/pusher/pusher-http-node#publishing-events) with a simple success message
+Create a `pusher-lambda.js` inside the `/api` directory that initializes a new Pusher object and receives data from the [`req.body` helper method](https://zeit.co/docs/v2/serverless-functions/supported-languages/#node.js-request-and-response-objects), before invoking [`pusher.trigger`](https://github.com/pusher/pusher-http-node#publishing-events) to register the event.
 
 ```js
 const Pusher = require('pusher')
@@ -210,9 +210,27 @@ module.exports = (req, res) => {
 }
 ```
 
-<Caption>`pusher-lambda.js` file inside of `/api` directory</Caption>
+<Caption>
+  An example <InlineCode>pusher-lambda.js</InlineCode> file inside the{' '}
+  <InlineCode>/api</InlineCode> directory
+</Caption>
 
-When <InlineCode>pusher.trigger</InlineCode> is called, an event will be broadcasted to all subscribed clients. That's all there is to wire everything up. We've created a more complete demo with these concepts [here](https://github.com/zeit/now-examples/pull/468). Take a look, hack around, and give us your feedback.
+When `pusher.trigger` is called, an event will be broadcasted to all subscribed clients.
+
+## Step 3: Deplying with ZEIT Now
+
+With your Pusher app set up, it is ready to be [deployed](/docs/v2/deployments/basics/) with [ZEIT Now](/docs/v2).
+
+If you have not yet installed Now, you can do so by installing [Now CLI](/download).
+
+You are now ready to deploy your app with **just a single command**:
+
+<Snippet dark text="now" />
+<Caption>Deploying your project with just a single command.</Caption>
+
+If you want to deploy your Pusher project when you push to a Git repository, you can use either [Now for GitHub](/docs/v2/integrations/now-for-github/) or [Now for GitLab](/docs/v2/integrations/now-for-gitlab/) to have your project automatically deployed on every push, and aliased on push to master.
+
+We've created a more complete demo with these concepts [here](https://github.com/zeit/now-examples/pull/468). Take a look, hack around, and give us your feedback.
 
 export default ({ children }) => <Guide meta={meta}>{children}</Guide>
 
