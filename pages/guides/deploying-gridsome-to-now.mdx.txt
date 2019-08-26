@@ -11,7 +11,7 @@ export const meta = {
   authors: ['developerayo'],
   url: '/guides/deploying-gridsome-with-zeit-now',
   image:
-    '',
+    'https://og-image.now.sh/**Deploying%20Gridsome%20Apps**%20%3Cbr%3E%20with%20ZEIT%20Now.png?theme=light&md=1&fontSize=100px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnow-black.svg&images=https%3A%2F%2Fgridsome.org%2Flogos%2Fonly-logo.svg&widths=auto&widths=auto',
   editUrl: 'pages/guides/deploying-gridsome-with-zeit-now.mdx',
   lastEdited: '2019-07-26'
 }
