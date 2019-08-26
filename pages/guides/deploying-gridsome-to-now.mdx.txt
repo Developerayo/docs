@@ -29,7 +29,6 @@ If you do not have the Gridsome CLI installed globally on your system, use the f
 <Snippet dark text="npm i -g @gridsome/cli" />
 <Caption>Installing Gridsome CLI global to the system's core user with <GenericLink href="https://www.npmjs.com">npm</GenericLink>.</Caption>
 
-After the installation is successful, create a new project and `cd` into the project folder. Use the following command below in your system terminal to do so:
 
 <Snippet dark text="gridsome create gridsome-project && cd gridsome-project" />
 <Caption>Creating a Gridsome project and moving into the project directory.</Caption>
