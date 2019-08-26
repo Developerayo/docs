@@ -37,7 +37,6 @@ After the installation is successful, create a new project and `cd` into the pro
 Gridsome Starter project will successfully clone `gridsome-starter-default`
 
 
-Next, to extend the project with client-side routing; create a `.vue` components inside the `/pages` folder to create pages routes, you can use `gridsome build` to generate static files in a `/dist` folder
 
 ## Step 2: Deploying with Now
 
