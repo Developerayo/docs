@@ -18,7 +18,7 @@ export const meta = {
 
 [Gridsome](https://gridsome.org/) is an open source Vue.js site generator which gives developers the power to build apps that are fast by default.
 
-In this guide, we will cover how to deploy a Gridsome app with [ZEIT Now](/docs/v2).
+In this guide, you will discover to create a Gridsome app and deploy it with [ZEIT Now](/now).
 
 ## Step 1: Set Up Your Gridsome Project
 
