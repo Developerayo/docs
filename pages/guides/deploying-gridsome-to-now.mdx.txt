@@ -9,7 +9,7 @@ export const meta = {
   description: 'Create your Gridsome app and deploy it with ZEIT Now.',
   published: '2019-07-26',
   authors: ['developerayo'],
-  url: '/guides/deploying-gridsome-to-now',
+  url: '/guides/deploying-gridsome-with-zeit-now',
   image:
     '',
   editUrl: 'pages/guides/deploying-gridsome-with-zeit-now.mdx',
