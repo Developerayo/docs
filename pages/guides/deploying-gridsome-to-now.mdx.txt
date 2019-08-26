@@ -16,7 +16,7 @@ export const meta = {
   lastEdited: '2019-07-26'
 }
 
-Gridsome is an open source vue.js site generator which gives developers the power to build beautiful JAMstack apps and Progressive Web Apps that are fast and scailable.
+[Gridsome](https://gridsome.org/) is an open source Vue.js site generator which gives developers the power to build apps that are fast by default.
 
 In this guide, we will cover how to deploy a Gridsome app with [ZEIT Now](/docs/v2).
 
