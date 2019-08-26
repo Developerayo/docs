@@ -34,7 +34,6 @@ After the installation is successful, create a new project and `cd` into the pro
 <Snippet dark text="gridsome create gridsome-project && cd gridsome-project" />
 <Caption>Creating a Gridsome project and moving into the project directory.</Caption>
 
-Gridsome Starter project will successfully clone `gridsome-starter-default`
 
 
 
