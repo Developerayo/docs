@@ -22,7 +22,7 @@ In this guide, you will discover to create a Gridsome app and deploy it with [ZE
 
 ## Step 1: Set Up Your Gridsome Project
 
-First, set up a Gridsome project using the [official Gridsome CLI](https://gridsome.org/docs).
+First, set up a Gridsome project using the [Gridsome CLI](https://gridsome.org/docs/gridsome-cli/#gridsome-cli) and move into the project directory.
 
 If you do not have the Gridsome CLI installed globally on your system, use the following command to install it globally:
 
