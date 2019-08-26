@@ -52,7 +52,7 @@ You can deploy your Gridsome app with **just a single command**:
   Deploying the app with the <InlineCode>now</InlineCode> command.
 </Caption>
 
-Once the app is deployed, you will receive a deployment URL similar to the following: <https://gridsome-project-ro3oxryae.now.sh/>
+If you want to deploy your Gridsome project when you push to a Git repository, you can use either [Now for GitHub](/docs/v2/integrations/now-for-github/) or [Now for GitLab](/docs/v2/integrations/now-for-gitlab/) to have your project automatically deployed on every push, and aliased on push to master.
 
 
 export default ({ children }) => <Guide meta={meta}>{children}</Guide>
