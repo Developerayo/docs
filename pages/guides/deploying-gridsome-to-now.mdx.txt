@@ -1,0 +1,64 @@
+import Guide from '~/components/layout/guide'
+import Snippet from '~/components/snippet'
+import { InlineCode } from '~/components/text/code'
+import Caption from '~/components/text/caption'
+import { GenericLink } from '~/components/text/link'
+
+export const meta = {
+  title: 'Deploying a Gridsome App with ZEIT Now',
+  description: 'Create your Gridsome app and deploy it with ZEIT Now.',
+  published: '2019-07-26',
+  authors: ['developerayo'],
+  url: '/guides/deploying-gridsome-to-now',
+  image:
+    '',
+  editUrl: 'pages/guides/deploying-gridsome-to-now.mdx',
+  lastEdited: '2019-07-26'
+}
+
+Gridsome is an open source vue.js site generator which gives developers the power to build beautiful JAMstack apps and Progressive Web Apps that are fast and scailable.
+
+In this guide, we will cover how to deploy a Gridsome app with [ZEIT Now](/docs/v2).
+
+## Step 1: Set Up Your Gridsome Project
+
+First, set up a Gridsome project using the [official Gridsome CLI](https://gridsome.org/docs).
+
+If you do not have the Gridsome CLI installed globally on your system, use the following command to install it globally:
+
+<Snippet dark text="npm i -g @gridsome/cli" />
+<Caption>Installing Gridsome CLI global to the system's core user with <GenericLink href="https://www.npmjs.com">npm</GenericLink>.</Caption>
+
+After the installation is successful, create a new project and `cd` into the project folder. Use the following command below in your system terminal to do so:
+
+<Snippet dark text="gridsome create gridsome-project && cd gridsome-project" />
+<Caption>Creating a bootstrapped Gridsome project and moving into the directory within a terminal.</Caption>
+
+Gridsome Starter project will successfully clone `gridsome-starter-default`
+
+The Gridsome CLI installs all the required dependencies and provisions a new project for you.
+
+Next, to extend the project with client-side routing; create a `.vue` components inside the `/pages` folder to create pages routes, you can use `gridsome build` to generate static files in a `/dist` folder
+
+## Step 2: Deploying with Now
+
+With your project set up, you are ready to deploy your Gridsome app with [Now](/now).
+
+If you have not yet installed Now, you can do so by [installing Now CLI](/download).
+
+You can deploy your Gridsome app with **just a single command**:
+
+<Snippet dark text="now" />
+
+<Caption>
+  Deploying the app with the <InlineCode>now</InlineCode> command.
+</Caption>
+
+Once the app is deployed, you will receive a deployment URL similar to the following: <https://gridsome-project-ro3oxryae.now.sh/>
+
+
+export default ({ children }) => <Guide meta={meta}>{children}</Guide>
+
+export const config = {
+  amp: 'hybrid'
+}
