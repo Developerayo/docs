@@ -38,7 +38,7 @@ Gridsome Starter project will successfully clone `gridsome-starter-default`
 
 
 
-## Step 2: Deploying with Now
+## Step 2: Deploying with ZEIT Now
 
 With your project set up, you are ready to deploy your Gridsome app with [Now](/now).
 
