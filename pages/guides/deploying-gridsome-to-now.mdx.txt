@@ -12,7 +12,7 @@ export const meta = {
   url: '/guides/deploying-gridsome-to-now',
   image:
     '',
-  editUrl: 'pages/guides/deploying-gridsome-to-now.mdx',
+  editUrl: 'pages/guides/deploying-gridsome-with-zeit-now.mdx',
   lastEdited: '2019-07-26'
 }
 
